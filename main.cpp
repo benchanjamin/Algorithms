@@ -3,6 +3,7 @@
 #include "Bag.h"
 #include "Queue.h"
 #include "Stack.h"
+#include "WeightedUF.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -13,7 +14,7 @@ int main() {
     Bag<string> bag;
 
     auto t0 = high_resolution_clock::now();
-    ifstream testFile("./Test Files/test.txt");
+    ifstream testFile("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
         string input;
         while (testFile >> input) {
@@ -32,7 +33,7 @@ int main() {
 
     t0 = high_resolution_clock::now();
     testFile.clear();
-    testFile.open("./Test Files/test.txt");
+    testFile.open("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
         string input;
         while (testFile >> input) {
@@ -55,7 +56,7 @@ int main() {
 
     t0 = high_resolution_clock::now();
     testFile.clear();
-    testFile.open("./Test Files/test.txt");
+    testFile.open("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
         string input;
         while (testFile >> input) {
@@ -71,5 +72,31 @@ int main() {
     t1 = high_resolution_clock::now();
 
     cout << "Finished Stack: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Test the union-find (quick-find)
+    t0 = high_resolution_clock::now();
+
+    testFile.clear();
+    testFile.open("./Test Files/largeUF.txt");
+    if (testFile.is_open()) {
+        int size;
+        testFile >> size;
+        WeightedUF uf = WeightedUF(size);
+        int p;
+        int q;
+        while (testFile >> p && testFile >> q) {
+            if (uf.find(p) == uf.find(q)) {
+                continue;
+            }
+            uf.weightedUnion(p, q);
+            cout << to_string(p) << " " << to_string(q) << endl;
+        }
+        cout << to_string(uf.count()) + " components" << endl;
+        testFile.close();
+    }
+    t1 = high_resolution_clock::now();
+
+    cout << "Finished Stack: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
 }
 

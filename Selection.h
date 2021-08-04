@@ -1,12 +1,6 @@
-//
-// Created by Ben Chan on 7/31/21.
-//
-
 #ifndef ALGORITHMS_SELECTION_H
 #define ALGORITHMS_SELECTION_H
 
-#include <algorithm>
-#include <concepts>
 #include <span>
 
 using namespace std;

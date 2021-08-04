@@ -101,8 +101,7 @@ int main() {
 
     cout << "Finished WeightedUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    vector<string> a{"dasd", "dsd", "Add", "bing"};
-    sort(a.begin(), a.end());
+    vector<string> a{"dasd"s, "dsd"s, "Add"s, "bing"s};
     Selection::sort<string>(a);
 }
 

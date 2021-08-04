@@ -149,6 +149,7 @@ T Stack<T>::pop() {
     catch (NoSuchElementException &e) {
         std::cout << "NoSuchElementException encountered: ";
         std::cout << e.what() << std::endl;
+        return nullptr;
     }
 }
 

@@ -1,9 +1,11 @@
 #include <chrono>
 #include <fstream>
+#include <string>
 #include "Bag.h"
 #include "Queue.h"
 #include "Stack.h"
 #include "WeightedUF.h"
+#include "Selection.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -73,11 +75,11 @@ int main() {
 
     cout << "Finished Stack: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    // Test the union-find (quick-find)
+    // Test the union-find (weighted)
     t0 = high_resolution_clock::now();
 
     testFile.clear();
-    testFile.open("./Test Files/largeUF.txt");
+    testFile.open("./Test Files/tinyUF.txt");
     if (testFile.is_open()) {
         int size;
         testFile >> size;
@@ -96,7 +98,9 @@ int main() {
     }
     t1 = high_resolution_clock::now();
 
-    cout << "Finished Stack: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+    cout << "Finished WeightedUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
+    string a[]{"dasd"s, "dsd"s, "Add"s, "bing"s};
+    Selection::sort<string>(a);
 }
 

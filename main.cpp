@@ -1,6 +1,7 @@
 #include <chrono>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "Bag.h"
 #include "Queue.h"
 #include "Stack.h"
@@ -100,7 +101,8 @@ int main() {
 
     cout << "Finished WeightedUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    string a[]{"dasd"s, "dsd"s, "Add"s, "bing"s};
+    vector<string> a{"dasd", "dsd", "Add", "bing"};
+    sort(a.begin(), a.end());
     Selection::sort<string>(a);
 }
 

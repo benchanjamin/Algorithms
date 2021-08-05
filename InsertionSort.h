@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_SELECTION_H
-#define ALGORITHMS_SELECTION_H
+#ifndef ALGORITHMS_INSERTIONSORT_H
+#define ALGORITHMS_INSERTIONSORT_H
 
 #include <span>
 
@@ -27,8 +27,8 @@ Equal<T> && requires(T a, T b) {
 };
 
 
-class Selection {
-    Selection() = default;
+class SelectionSort {
+    SelectionSort() = default;
 
     template<typename T>
     requires Comparable<T>
@@ -42,7 +42,7 @@ public:
 
 template<typename T>
 requires Comparable<T>
-void Selection::sort(span<T> a) {
+void SelectionSort::sort(span<T> a) {
     int n = a.size();
     for (int i = 0; i < n; i++) {
         int min = i;
@@ -55,11 +55,11 @@ void Selection::sort(span<T> a) {
 
 template<typename T>
 requires Comparable<T>
-void Selection::exch(span<T> a, int i, int j) {
+void SelectionSort::exch(span<T> a, int i, int j) {
     T swap = a[i];
     a[i] = a[j];
     a[j] = swap;
 }
 
 
-#endif //ALGORITHMS_SELECTION_H
+#endif //ALGORITHMS_INSERTIONSORT_H

@@ -6,19 +6,21 @@
 #include "Queue.h"
 #include "Stack.h"
 #include "WeightedUF.h"
-#include "Selection.h"
+#include "SelectionSort.h"
 
 using namespace std;
 using namespace std::chrono;
 
 int main() {
-    // Test the bag
+    // Tests the bag
     cout << "Testing Bag: ";
     Bag<string> bag;
 
-    auto t0 = high_resolution_clock::now();
+    time_point<std::chrono::high_resolution_clock> t0;
+
     ifstream testFile("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
+        t0 = high_resolution_clock::now();
         string input;
         while (testFile >> input) {
             bag.add(input);
@@ -34,10 +36,10 @@ int main() {
     cout << "Testing Queue: ";
     Queue<string> queue;
 
-    t0 = high_resolution_clock::now();
     testFile.clear();
     testFile.open("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
+        t0 = high_resolution_clock::now();
         string input;
         while (testFile >> input) {
             if (!(input == "-"))
@@ -57,10 +59,10 @@ int main() {
     cout << "Testing Stack: ";
     Stack<string> stack;
 
-    t0 = high_resolution_clock::now();
     testFile.clear();
     testFile.open("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
+        t0 = high_resolution_clock::now();
         string input;
         while (testFile >> input) {
             if (!(input == "-"))
@@ -76,12 +78,11 @@ int main() {
 
     cout << "Finished Stack: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    // Test the union-find (weighted)
-    t0 = high_resolution_clock::now();
-
+    // Tests the union-find (weighted)
     testFile.clear();
     testFile.open("./Test Files/tinyUF.txt");
     if (testFile.is_open()) {
+        t0 = high_resolution_clock::now();
         int size;
         testFile >> size;
         WeightedUF uf = WeightedUF(size);
@@ -101,7 +102,24 @@ int main() {
 
     cout << "Finished WeightedUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    vector<string> a{"dasd"s, "dsd"s, "Add"s, "bing"s};
-    Selection::sort<string>(a);
+    // Tests the selection sort algorithm
+    testFile.clear();
+    testFile.open("./Test Files/randomStrings.txt");
+    vector<string> stringVector;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        SelectionSort{stringVector};
+    }
+    t1 = high_resolution_clock::now();
+
+    cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the insertion sort algorithm
+
 }
 

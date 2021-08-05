@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_INSERTIONSORT_H
-#define ALGORITHMS_INSERTIONSORT_H
+#ifndef ALGORITHMS_SHELLSORT_H
+#define ALGORITHMS_SHELLSORT_H
 
 #include <span>
 #include "Comparable.h"
@@ -7,9 +7,8 @@
 using namespace std;
 
 template<typename T> requires Comparable<T>
-class InsertionSort {
-public:
-    explicit InsertionSort<T>(span<T> a) {
+class ShellSort {
+    explicit ShellSort<T>(span<T> a) {
         int n = a.size();
         for (int i = 1; i < n; i++) {
             for (int j = i; j > 0 && (a[j] < a[j - 1]); j--) {
@@ -18,28 +17,29 @@ public:
         }
     };
 
-private:
     static void exch(span<T> a, int i, int j);
+
+public:
 };
 
 template<typename T>
 requires Comparable<T>
-void InsertionSort<T>::exch(span<T> a, int i, int j) {
+void ShellSort<T>::exch(span<T> a, int i, int j) {
     T swap = a[i];
     a[i] = a[j];
     a[j] = swap;
 }
 
 template<typename T> requires Comparable<T>
-InsertionSort(span<T>) -> InsertionSort<T>;
+ShellSort(span<T>) -> ShellSort<T>;
 
 template<typename T> requires Comparable<T>
-InsertionSort(vector<T>) -> InsertionSort<T>;
+ShellSort(vector<T>) -> ShellSort<T>;
 
 template<typename T, size_t SIZE> requires Comparable<T>
-InsertionSort(array<T, SIZE>) -> InsertionSort<T>;
+ShellSort(array<T, SIZE>) -> ShellSort<T>;
 
 template<typename T> requires Comparable<T>
-InsertionSort(T a[]) -> InsertionSort<T>;
+ShellSort(T a[]) -> ShellSort<T>;
 
-#endif //ALGORITHMS_INSERTIONSORT_H
+#endif //ALGORITHMS_SHELLSORT_H

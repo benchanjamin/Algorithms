@@ -27,8 +27,8 @@ Equal<T> && requires(T a, T b) {
 };
 
 
-class SelectionSort {
-    SelectionSort() = default;
+class InsertionSort {
+    InsertionSort() = default;
 
     template<typename T>
     requires Comparable<T>
@@ -42,7 +42,7 @@ public:
 
 template<typename T>
 requires Comparable<T>
-void SelectionSort::sort(span<T> a) {
+void InsertionSort::sort(span<T> a) {
     int n = a.size();
     for (int i = 0; i < n; i++) {
         int min = i;
@@ -55,7 +55,7 @@ void SelectionSort::sort(span<T> a) {
 
 template<typename T>
 requires Comparable<T>
-void SelectionSort::exch(span<T> a, int i, int j) {
+void InsertionSort::exch(span<T> a, int i, int j) {
     T swap = a[i];
     a[i] = a[j];
     a[j] = swap;

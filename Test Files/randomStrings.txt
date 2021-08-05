@@ -1,4 +1,6 @@
-﻿krzro
+﻿Finished Selection Sort: 490357 msecs
+
+krzro
 aihbn
 sgdxe
 elzcw

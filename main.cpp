@@ -7,6 +7,8 @@
 #include "Stack.h"
 #include "WeightedUF.h"
 #include "SelectionSort.h"
+#include "InsertionSort.h"
+
 
 using namespace std;
 using namespace std::chrono;
@@ -120,6 +122,22 @@ int main() {
     cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
     // Tests the insertion sort algorithm
+    // Tests the selection sort algorithm
+    testFile.clear();
+    testFile.open("./Test Files/randomStrings.txt");
+    vector<string> stringVector2;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector2.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        InsertionSort{stringVector2};
+    }
+    t1 = high_resolution_clock::now();
+
+    cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
 }
 

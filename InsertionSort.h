@@ -2,64 +2,44 @@
 #define ALGORITHMS_INSERTIONSORT_H
 
 #include <span>
+#include "Comparable.h"
 
 using namespace std;
 
-template<class From, class To>
-concept convertible_to =
-std::is_convertible_v<From, To> && requires(From (&f)()) {
-    static_cast<To>(f());
-};
-
-template<typename T>
-concept Equal =requires(T a, T b) {
-    { a == b } -> convertible_to<bool>;
-    { a != b } -> convertible_to<bool>;
-};
-
-template<typename T>
-concept Comparable =
-Equal<T> && requires(T a, T b) {
-    { a <= b } -> convertible_to<bool>;
-    { a < b } -> convertible_to<bool>;
-    { a > b } -> convertible_to<bool>;
-    { a >= b } -> convertible_to<bool>;
-};
-
-
+template<typename T> requires Comparable<T>
 class InsertionSort {
-    InsertionSort() = default;
+    explicit InsertionSort<T>(span<T> a) {
+        int n = a.size();
+        for (int i = 1; i < n; i++) {
+            for (int j = i; j > 0 && (a[j] < a[j - 1]); j--) {
+                exch(a, j, j - 1);
+            }
+        }
+    };
 
-    template<typename T>
-    requires Comparable<T>
     static void exch(span<T> a, int i, int j);
 
 public:
-    template<typename T>
-    requires Comparable<T>
-    static void sort(span<T> a);
 };
 
 template<typename T>
 requires Comparable<T>
-void InsertionSort::sort(span<T> a) {
-    int n = a.size();
-    for (int i = 0; i < n; i++) {
-        int min = i;
-        for (int j = i + 1; j < n; j++) {
-            if (a[j] < a[min]) min = j;
-        }
-        exch(a, i, min);
-    }
-}
-
-template<typename T>
-requires Comparable<T>
-void InsertionSort::exch(span<T> a, int i, int j) {
+void InsertionSort<T>::exch(span<T> a, int i, int j) {
     T swap = a[i];
     a[i] = a[j];
     a[j] = swap;
 }
 
+template<typename T> requires Comparable<T>
+InsertionSort(span<T>) -> InsertionSort<T>;
+
+template<typename T> requires Comparable<T>
+InsertionSort(vector<T>) -> InsertionSort<T>;
+
+template<typename T, size_t SIZE> requires Comparable<T>
+InsertionSort(array<T, SIZE>) -> InsertionSort<T>;
+
+template<typename T> requires Comparable<T>
+InsertionSort(T a[]) -> InsertionSort<T>;
 
 #endif //ALGORITHMS_INSERTIONSORT_H

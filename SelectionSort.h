@@ -2,29 +2,10 @@
 #define ALGORITHMS_SELECTIONSORT_H
 
 #include <span>
+#include "Comparable.h"
 
 using namespace std;
 
-template<class From, class To>
-concept convertible_to =
-std::is_convertible_v<From, To> && requires(From (&f)()) {
-    static_cast<To>(f());
-};
-
-template<typename T>
-concept Equal =requires(T a, T b) {
-    { a == b } -> convertible_to<bool>;
-    { a != b } -> convertible_to<bool>;
-};
-
-template<typename T>
-concept Comparable =
-Equal<T> && requires(T a, T b) {
-    { a <= b } -> convertible_to<bool>;
-    { a < b } -> convertible_to<bool>;
-    { a > b } -> convertible_to<bool>;
-    { a >= b } -> convertible_to<bool>;
-};
 
 template<typename T> requires Comparable<T>
 class SelectionSort {

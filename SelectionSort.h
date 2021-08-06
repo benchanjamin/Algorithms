@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 template<typename T> requires Comparable<T>
 class SelectionSort {
 public:

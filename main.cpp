@@ -104,7 +104,7 @@ int main() {
 
     cout << "Finished WeightedUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    // Tests the selection sort algorithm
+    // Tests the selection sort algorithm on strings
     testFile.clear();
     testFile.open("./Test Files/randomStrings.txt");
     vector<string> stringVector;
@@ -121,8 +121,27 @@ int main() {
 
     cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
+    // Tests the selection sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/randomNumbers.txt");
+    vector<int> intVector;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        SelectionSort{intVector};
+    }
+    t1 = high_resolution_clock::now();
+    for (int x: intVector) {
+        cout << x << endl;
+    }
+
+    cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
     // Tests the insertion sort algorithm
-    // Tests the selection sort algorithm
     testFile.clear();
     testFile.open("./Test Files/randomStrings.txt");
     vector<string> stringVector2;

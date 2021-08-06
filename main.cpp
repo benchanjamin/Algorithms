@@ -146,6 +146,28 @@ int main() {
 
     cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
+    // Tests the selection reverse sort algorithm on strings
+    t0 = high_resolution_clock::now();
+    SelectionSort{stringVector, true};
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the selection sort algorithm on ints
+    t0 = high_resolution_clock::now();
+    SelectionSort(intVector, true);
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
     // Tests the insertion sort algorithm on strings
     testFile.clear();
     testFile.open("./Test Files/randomStrings.txt");
@@ -161,7 +183,7 @@ int main() {
     }
     t1 = high_resolution_clock::now();
 
-    cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+    cout << "Finished Insertion Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
 }
 

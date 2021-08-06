@@ -118,6 +118,10 @@ int main() {
         SelectionSort{stringVector};
     }
     t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector) {
+        cout << x << " ";
+    }
+    cout << endl;
 
     cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
@@ -135,13 +139,14 @@ int main() {
         SelectionSort{intVector};
     }
     t1 = high_resolution_clock::now();
-    for (int x: intVector) {
-        cout << x << endl;
+    for (const auto &x: intVector) {
+        cout << x << " ";
     }
+    cout << endl;
 
     cout << "Finished Selection Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    // Tests the insertion sort algorithm
+    // Tests the insertion sort algorithm on strings
     testFile.clear();
     testFile.open("./Test Files/randomStrings.txt");
     vector<string> stringVector2;

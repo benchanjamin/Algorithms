@@ -9,7 +9,12 @@
  *  This implementation uses a singly linked list with a nested class Node.
  *
  *  @author Benjamin Chan
- *  @author Ben Barani
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/13stacks/Bag.java.html
  *
  *  @param <T> the generic type of an item in this bag
  */

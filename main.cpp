@@ -1,7 +1,5 @@
 #include <chrono>
 #include <fstream>
-#include <string>
-#include <vector>
 #include "Bag.h"
 #include "Queue.h"
 #include "Stack.h"
@@ -18,7 +16,7 @@ int main() {
     cout << "Testing Bag: ";
     Bag<string> bag;
 
-    time_point<std::chrono::high_resolution_clock> t0;
+    time_point<high_resolution_clock> t0;
 
     ifstream testFile("./Test Files/testCollections.txt");
     if (testFile.is_open()) {
@@ -182,6 +180,10 @@ int main() {
         InsertionSort{stringVector2};
     }
     t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector2) {
+        cout << x << " ";
+    }
+    cout << endl;
 
     cout << "Finished Insertion Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 

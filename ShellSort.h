@@ -62,4 +62,16 @@ ShellSort(array<T, SIZE>) -> ShellSort<T>;
 template<typename T> requires Comparable<T>
 ShellSort(T a[]) -> ShellSort<T>;
 
+template<typename T> requires Comparable<T>
+ShellSort(span<T>, bool reverse) -> ShellSort<T>;
+
+template<typename T> requires Comparable<T>
+ShellSort(vector<T>, bool reverse) -> ShellSort<T>;
+
+template<typename T, size_t SIZE> requires Comparable<T>
+ShellSort(array<T, SIZE>, bool reverse) -> ShellSort<T>;
+
+template<typename T> requires Comparable<T>
+ShellSort(T a[], bool reverse) -> ShellSort<T>;
+
 #endif //ALGORITHMS_SHELLSORT_H

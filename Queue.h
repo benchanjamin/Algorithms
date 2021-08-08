@@ -15,7 +15,12 @@
  *  This implementation uses a singly linked list with a nested class Node.
  *
  *  @author Benjamin Chan
- *  @author Ben Barani
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/41graph/Queue.java.html.
  *
  *  @param <T> the generic type of an item in this queue
  */
@@ -47,18 +52,45 @@ public:
         delete first;
     };
 
+    /**
+     * Returns true if this queue is empty.
+     *
+     * @return {@code true} if this queue is empty; {@code false} otherwise
+     */
     inline bool isEmpty() {
         return first == nullptr;
     };
 
+    /**
+     * Returns the number of items in this queue.
+     *
+     * @return the number of items in this queue
+     */
     inline int size() {
         return n;
     }
 
+    /**
+     * Returns the item least recently added to this queue.
+     *
+     * @return the item least recently added to this queue
+     * @throws NoSuchElementException if this queue is empty
+     */
     T peek();
 
+    /**
+     * Adds the item to this queue.
+     *
+     * @param  item the item to add
+     */
     void enqueue(T item);
 
+    /**
+     * Removes and returns the item on this queue that was least recently added.
+     *
+     * @return the item on this queue that was least recently added
+     * @throws NoSuchElementException if this queue is empty
+     */
     T dequeue();
 
     class Iterator {
@@ -108,7 +140,7 @@ public:
     }
 
 private:
-
+    // helper linked list class
     class Node {
         friend class Queue;
 
@@ -122,11 +154,8 @@ private:
     };
 
     int n;
-
     Node *first;
-
     Node *last;
-
 };
 
 

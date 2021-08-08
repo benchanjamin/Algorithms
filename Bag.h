@@ -1,6 +1,9 @@
 #ifndef ALGORITHMS_BAG_H
 #define ALGORITHMS_BAG_H
 
+#include <sstream>
+#include <string>
+
 /**
  *  The {@code Bag} class represents a bag (or multiset) of
  *  generic items. It supports insertion and iterating over the
@@ -68,6 +71,7 @@ public:
     */
     void add(T item);
 
+
     /// Nested iterator class
     class Iterator {
         friend class Bag<T>;
@@ -115,9 +119,12 @@ public:
         return Iterator(last->next);
     }
 
+    std::string toString() const;
+
 private:
     class Node {
         friend class Bag;
+
 
         T item;
         Node *next;
@@ -148,5 +155,21 @@ void Bag<T>::add(T item) {
     first = new Node(item, oldFirst);
     n++;
 }
+
+template<typename T>
+std::string Bag<T>::toString() const {
+    std::stringstream ss;
+    for (const auto &item: *this) {
+        ss << std::to_string(item) << " ";
+    }
+    ss << std::endl;
+    return ss.str();
+}
+
+template<typename T>
+std::ostream &operator<<(std::ostream &os, const Bag<T> &bag) {
+    return os << bag.toString();
+}
+
 
 #endif //ALGORITHMS_BAG_H

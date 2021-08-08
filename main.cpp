@@ -25,8 +25,11 @@ int main() {
         while (testFile >> input) {
             bag.add(input);
         }
-        cout << "size of bag = " << bag.size() << endl;
         testFile.close();
+        cout << "size of bag = " << bag.size() << endl;
+
+        cout << bag;
+
     }
     auto t1 = high_resolution_clock::now();
 

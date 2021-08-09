@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <string>
+#include <boost/cast.hpp>
 
 /**
  *  The {@code Bag} class represents a bag (or multiset) of
@@ -119,7 +120,7 @@ public:
         return Iterator(last->next);
     }
 
-    std::string toString() const;
+    [[nodiscard]] std::string toString() const;
 
 private:
     class Node {
@@ -160,7 +161,7 @@ template<typename T>
 std::string Bag<T>::toString() const {
     std::stringstream ss;
     for (const auto &item: *this) {
-        ss << std::to_string(item) << " ";
+        ss << item << " ";
     }
     ss << std::endl;
     return ss.str();

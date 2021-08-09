@@ -172,5 +172,4 @@ std::ostream &operator<<(std::ostream &os, const Bag<T> &bag) {
     return os << bag.toString();
 }
 
-
 #endif //ALGORITHMS_BAG_H

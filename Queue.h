@@ -139,6 +139,8 @@ public:
         return Iterator(last->next);
     }
 
+    [[nodiscard]] std::string toString() const;
+
 private:
     // helper linked list class
     class Node {
@@ -198,5 +200,19 @@ T Queue<T>::dequeue() {
     }
 }
 
+template<typename T>
+std::string Queue<T>::toString() const {
+    std::stringstream ss;
+    for (const auto &item: *this) {
+        ss << boost::lexical_cast<std::string>(item) << " ";
+    }
+    ss << std::endl;
+    return ss.str();
+}
+
+template<typename T>
+std::ostream &operator<<(std::ostream &os, const Queue<T> &queue) {
+    return os << queue.toString();
+}
 
 #endif //ALGORITHMS_QUEUE_H

@@ -28,7 +28,7 @@ int main() {
         testFile.close();
         cout << "size of bag = " << bag.size() << endl;
 
-        cout << bag;
+        cout << "Items in the bag: " << bag;
 
     }
     auto t1 = high_resolution_clock::now();
@@ -51,9 +51,11 @@ int main() {
                 cout << queue.dequeue() + " ";
         }
         testFile.close();
+        cout << endl;
     }
 
-    cout << endl;
+    cout << "Remaining Items in the Queue: " << queue;
+
     t1 = high_resolution_clock::now();
 
     cout << "Finished Testing Queue: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;

@@ -3,7 +3,7 @@
 
 #include <sstream>
 #include <string>
-#include <boost/cast.hpp>
+#include <boost/lexical_cast.hpp>
 
 /**
  *  The {@code Bag} class represents a bag (or multiset) of
@@ -161,7 +161,7 @@ template<typename T>
 std::string Bag<T>::toString() const {
     std::stringstream ss;
     for (const auto &item: *this) {
-        ss << item << " ";
+        ss << boost::lexical_cast<std::string>(item) << " ";
     }
     ss << std::endl;
     return ss.str();

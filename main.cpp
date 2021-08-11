@@ -80,7 +80,6 @@ int main() {
 
     cout << "Remaining Items in the Stack: " << stack;
 
-    cout << endl;
     t1 = high_resolution_clock::now();
 
     cout << "Finished Stack: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
@@ -277,5 +276,88 @@ int main() {
 
     cout << "Finished Insertion Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
+    // Tests the shell sort algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector5;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector5.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        ShellSort{stringVector5};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector5) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Shell Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the shell sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector5;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector5.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        ShellSort{intVector5};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector5) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Shell Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the shell reverse sort algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector6;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector6.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        ShellSort{stringVector6, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector6) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Shell Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the shell reverse sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector6;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector6.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        ShellSort{intVector6, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector6) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Shell Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 }
 

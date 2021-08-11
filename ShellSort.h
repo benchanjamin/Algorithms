@@ -27,6 +27,7 @@ public:
                         exch(a, j, j - h);
                     }
                 }
+                assert(isHsorted(a, h, reverse));
                 h /= 3;
             }
         } else {
@@ -36,6 +37,7 @@ public:
                         exch(a, j, j - h);
                     }
                 }
+                assert(isHsorted(a, h, reverse));
                 h /= 3;
             }
         }
@@ -45,8 +47,7 @@ public:
 private:
     static void exch(span<T> a, int i, int j);
 
-    static bool isHsorted(span<T>, int h);
-
+    bool isHsorted(span<T> a, int h, bool reverse);
 };
 
 template<typename T>
@@ -59,11 +60,17 @@ void ShellSort<T>::exch(span<T> a, int i, int j) {
 
 template<typename T>
 requires Comparable<T>
-bool ShellSort<T>::isHsorted(span<T> a, int h) {
+bool ShellSort<T>::isHsorted(span<T> a, int h, bool reverse) {
     int length = a.size();
-    for (int i = h; i < length; i++)
-        if (a[i] < a[i - h]) return false;
-    return true;
+    if (!reverse) {
+        for (int i = h; i < length; i++)
+            if (a[i] < a[i - h]) return false;
+        return true;
+    } else {
+        for (int i = h; i < length; i++)
+            if (a[i] > a[i - h]) return false;
+        return true;
+    }
 }
 
 template<typename T> requires Comparable<T>

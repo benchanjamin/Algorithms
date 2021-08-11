@@ -73,6 +73,8 @@ public:
     void add(T item);
 
 
+    [[nodiscard]] std::string toString() const;
+
     /// Nested iterator class
     class Iterator {
         friend class Bag<T>;
@@ -112,15 +114,23 @@ public:
         }
     }; // End of inner class iterator
 
+    /**
+     * Returns an iterator that points to the first node of the bag.
+     *
+     * @return an iterator that points to the first node of the bag
+     */
     inline Iterator begin() const {
         return Iterator(first);
     }
 
+    /**
+     * Returns an iterator that points to the past-the-end node after the last node of the bag.
+     *
+     * @return an iterator that points to the past-the-end node after the last node of the bag
+     */
     inline Iterator end() const {
         return Iterator(last->next);
     }
-
-    [[nodiscard]] std::string toString() const;
 
 private:
     class Node {

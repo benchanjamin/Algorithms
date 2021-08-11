@@ -154,7 +154,7 @@ public:
     }
 
     inline Iterator end() const {
-        return Iterator(last);
+        return Iterator(last->next);
     }
 
 private:
@@ -197,8 +197,13 @@ T Stack<T>::peek() {
 
 template<typename T>
 void Stack<T>::push(T item) {
-    if (isEmpty())
+    if (isEmpty()) {
+        last = new Node();
         first = last;
+        first->item = item;
+        n++;
+        return;
+    }
     Node *oldFirst = first;
     first = new Node(item, oldFirst);
     n++;

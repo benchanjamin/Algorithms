@@ -7,7 +7,7 @@
 using namespace std;
 
 /**
- * The {@code Selection} class provides static methods for sorting an
+ * The {@code SelectionSort} class provides static methods for sorting an
  * array using selection sort.
  * This implementation makes ~ ½ n^2 compares to sort
  * any array of length n, so it is not suitable for sorting large arrays.

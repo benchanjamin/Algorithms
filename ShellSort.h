@@ -6,6 +6,27 @@
 
 using namespace std;
 
+/**
+ *  The {@code ShellSort} class provides static methods for sorting an
+ *  array using Shellsort with
+ *  Knuth's increment sequence
+ *  (1, 4, 13, 40, ...). In the worst case, this implementation makes
+ *  Θ(n^(3/2)) compares and exchanges to sort
+ *  an array of length n.
+ *
+ *  This sorting algorithm is not stable.
+ *  It uses Θ(1) extra memory (not including the input array).
+ *
+ *  @author Benjamin Chan
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/25applications/Insertion.java.html.
+ *
+ *  @param <T> the generic type of an item in this sorting algorithm
+ */
 template<typename T> requires Comparable<T>
 class ShellSort {
 public:

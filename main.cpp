@@ -18,7 +18,7 @@ int main() {
 
     time_point<high_resolution_clock> t0;
 
-    ifstream testFile("./Test Files/testCollections.txt");
+    ifstream testFile("./Test Files/tobe.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         string input;
@@ -40,7 +40,7 @@ int main() {
     Queue<string> queue;
 
     testFile.clear();
-    testFile.open("./Test Files/testCollections.txt");
+    testFile.open("./Test Files/tobe.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         string input;
@@ -65,7 +65,7 @@ int main() {
     Stack<string> stack;
 
     testFile.clear();
-    testFile.open("./Test Files/testCollections.txt");
+    testFile.open("./Test Files/tobe.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         string input;

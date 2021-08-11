@@ -1,9 +1,9 @@
 #ifndef ALGORITHMS_BAG_H
 #define ALGORITHMS_BAG_H
 
-#include <sstream>
-#include <string>
-#include <boost/lexical_cast.hpp>
+#include <string>                   // std::string
+#include <sstream>                  // std::stringstream
+#include <boost/lexical_cast.hpp>   // boost::lexical_cast
 
 /**
  *  The {@code Bag} class represents a bag (or multiset) of
@@ -24,19 +24,22 @@
  */
 template<typename T>
 class Bag {
+    /**
+     * @def the helper inner linked list class for a queue
+     */
     class Node;
 
 public:
     /// Initializes an empty bag
     Bag() : n(0), first(nullptr), last(nullptr) {};
 
-    /// Prohibits construction from an lvalue Bag
+    /// Prohibits construction from an lvalue bag
     Bag(const Bag<T> &other) = delete;
 
-    /// Prohibits construction from an rvalue Bag
+    /// Prohibits construction from an rvalue bag
     Bag(Bag<T> &&other) = delete;
 
-    /// Destructor deletes all allocated items of Bag
+    /// Destructor deletes all allocated items of a bag
     ~Bag() {
         while (first->next != nullptr) {
             Node *temp = first;
@@ -105,9 +108,8 @@ public:
 
         // Overload for the preincrement operator ++
         inline Iterator &operator++() {
-            Iterator temp = *this;
-            nodePtr = nodePtr->next;
-            return temp;
+            this->nodePtr = this->nodePtr->next;
+            return *this;
         }
 
         // Overload for the postincrement operator ++
@@ -150,10 +152,13 @@ private:
                 item(item), next(ptr) {}
     };
 
+    /// the number of nodes in a bag
     int n;
 
+    /// the first node in a bag
     Node *first;
 
+    /// the last node in a bag
     Node *last;
 };
 

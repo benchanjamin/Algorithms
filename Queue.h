@@ -1,8 +1,11 @@
 #ifndef ALGORITHMS_QUEUE_H
 #define ALGORITHMS_QUEUE_H
 
-#include <iostream>
-#include <exception>
+#include <string>                   // std::string
+#include <sstream>                  // std::stringstream
+#include <iostream>                 // std::cout
+#include <exception>                // std::exception
+#include <boost/lexical_cast.hpp>   // boost::lexical_cast
 
 /**
  *  The {@code Queue} class represents a first-in-first-out (FIFO)
@@ -27,8 +30,15 @@
 template<typename T>
 class Queue {
 private:
+    /**
+     * @def the helper inner linked list class for a queue
+     */
     class Node;
 
+    /**
+     * @def the NoSuchElementException if there are no items in a queue after
+     * using the dequeue() and peek() methods
+     */
     struct NoSuchElementException : public std::exception {
         const char *what() {
             return "Queue Underflow";
@@ -39,10 +49,13 @@ public:
     /// Initializes an empty queue
     Queue() : n(0), first(nullptr), last(nullptr) {};
 
+    /// Prevents the invocation of the constructor with an lvalue queue
     Queue(const Queue<T> &other) = delete;
 
+    /// Prevents the invocation of the constructor with an rvalue queue
     Queue(Queue<T> &&other) = delete;
 
+    /// Destructor deletes all allocated items of a queue
     ~Queue() {
         while (first->next != nullptr) {
             Node *temp = first;
@@ -100,6 +113,7 @@ public:
      */
     [[nodiscard]] std::string toString() const;
 
+    /// Nested iterator class
     class Iterator {
         friend class Queue<T>;
 
@@ -125,9 +139,8 @@ public:
 
         // Overload for the preincrement operator ++
         inline Iterator &operator++() {
-            Iterator temp = *this;
-            nodePtr = nodePtr->next;
-            return temp;
+            this->nodePtr = this->nodePtr->next;
+            return *this;
         }
 
         // Overload for the postincrement operator ++
@@ -170,8 +183,13 @@ private:
                 item(item), next(ptr) {}
     };
 
+    /// the number of nodes in a queue
     int n;
+
+    /// the first node in a queue
     Node *first;
+
+    /// the last node in a queue
     Node *last;
 };
 

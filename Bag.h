@@ -186,6 +186,7 @@ std::string Bag<T>::toString() const {
     return ss.str();
 }
 
+/// Overloads the "<<" operator for a bag
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const Bag<T> &bag) {
     return os << bag.toString();

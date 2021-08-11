@@ -245,7 +245,7 @@ std::string Queue<T>::toString() const {
     return ss.str();
 }
 
-/// Overload the "<<" operator
+/// Overloads the "<<" operator for a queue
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const Queue<T> &queue) {
     return os << queue.toString();

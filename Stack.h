@@ -237,6 +237,7 @@ std::string Stack<T>::toString() const {
     return ss.str();
 }
 
+/// Overloads the "<<" operator for a stack
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const Stack<T> &stack) {
     return os << stack.toString();

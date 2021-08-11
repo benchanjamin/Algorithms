@@ -1,7 +1,3 @@
-//
-// Created by Ben Chan on 7/24/21.
-//
-
 #ifndef ALGORITHMS_WEIGHTEDQUICKUNIONUF_H
 #define ALGORITHMS_WEIGHTEDQUICKUNIONUF_H
 

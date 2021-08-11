@@ -1,12 +1,12 @@
 #include <chrono>
 #include <fstream>
-#include "Bag.h"
+#include "Bag.hpp"
 #include "Queue.h"
-#include "Stack.h"
-#include "WeightedQuickUnionUF.h"
-#include "SelectionSort.h"
-#include "InsertionSort.h"
-#include "ShellSort.h"
+#include "Stack.hpp"
+#include "WeightedQuickUnionUF.hpp"
+#include "SelectionSort.hpp"
+#include "InsertionSort.hpp"
+#include "ShellSort.hpp"
 #include "MergeSort.h"
 
 

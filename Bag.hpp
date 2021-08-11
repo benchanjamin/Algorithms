@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_BAG_H
-#define ALGORITHMS_BAG_H
+#ifndef ALGORITHMS_BAG_HPP
+#define ALGORITHMS_BAG_HPP
 
 #include <string>                   // std::string
 #include <sstream>                  // std::stringstream
@@ -192,4 +192,4 @@ std::ostream &operator<<(std::ostream &os, const Bag<T> &bag) {
     return os << bag.toString();
 }
 
-#endif //ALGORITHMS_BAG_H
+#endif //ALGORITHMS_BAG_HPP

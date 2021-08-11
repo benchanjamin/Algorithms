@@ -2,8 +2,8 @@
 // Created by Ben Chan on 8/5/21.
 //
 
-#ifndef ALGORITHMS_COMPARABLE_H
-#define ALGORITHMS_COMPARABLE_H
+#ifndef ALGORITHMS_COMPARABLE_HPP
+#define ALGORITHMS_COMPARABLE_HPP
 
 #include <concepts>
 
@@ -45,4 +45,4 @@ Equal<T> && requires(T a, T b) {
     { a >= b } -> convertible_to<bool>;
 };
 
-#endif //ALGORITHMS_COMPARABLE_H
+#endif //ALGORITHMS_COMPARABLE_HPP

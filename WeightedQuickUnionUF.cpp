@@ -1,7 +1,7 @@
 //
 // Created by Ben Chan on 7/31/21.
 //
-#include "WeightedQuickUnionUF.h"
+#include "WeightedQuickUnionUF.hpp"
 
 int WeightedQuickUnionUF::find(int p) {
     validate(p);

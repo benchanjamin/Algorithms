@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_STACK_H
-#define ALGORITHMS_STACK_H
+#ifndef ALGORITHMS_STACK_HPP
+#define ALGORITHMS_STACK_HPP
 
 #include <string>                   // std::string
 #include <sstream>                  // std::stringstream
@@ -243,4 +243,4 @@ std::ostream &operator<<(std::ostream &os, const Stack<T> &stack) {
     return os << stack.toString();
 }
 
-#endif //ALGORITHMS_STACK_H
+#endif //ALGORITHMS_STACK_HPP

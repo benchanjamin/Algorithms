@@ -1,8 +1,8 @@
-#ifndef ALGORITHMS_SHELLSORT_H
-#define ALGORITHMS_SHELLSORT_H
+#ifndef ALGORITHMS_SHELLSORT_HPP
+#define ALGORITHMS_SHELLSORT_HPP
 
 #include <span>
-#include "Comparable.h"
+#include "Comparable.hpp"
 
 using namespace std;
 
@@ -118,4 +118,4 @@ ShellSort(array<T, SIZE>, bool reverse) -> ShellSort<T>;
 template<typename T> requires Comparable<T>
 ShellSort(T a[], bool reverse) -> ShellSort<T>;
 
-#endif //ALGORITHMS_SHELLSORT_H
+#endif //ALGORITHMS_SHELLSORT_HPP

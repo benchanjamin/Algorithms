@@ -6,6 +6,29 @@
 
 using namespace std;
 
+/**
+ *  The {@code Insertion} class provides static methods for sorting an
+ *  array using insertion sort.
+ *
+ *  In the worst case, this implementation makes ~ &frac12; <em>n</em><sup>2</sup>
+ *  compares and ~ &frac12; <em>n</em><sup>2</sup> exchanges to sort an array
+ *  of length <em>n</em>. So, it is not suitable for sorting large arbitrary
+ *  arrays. More precisely, the number of exchanges is exactly equal to the
+ *  number of inversions. So, for example, it sorts a partially-sorted array
+ *  in linear time.
+ *  <p>
+ *  This sorting algorithm is stable.
+ *  It uses &Theta;(1) extra memory (not including the input array).
+ *  <p>
+ *  See <a href="https://algs4.cs.princeton.edu/21elementary/InsertionPedantic.java.html">InsertionPedantic.java</a>
+ *  for a version that eliminates the compiler warning.
+ *  <p>
+ *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ *  @author Robert Sedgewick
+ *  @author Kevin Wayne
+ */
 template<typename T> requires Comparable<T>
 class InsertionSort {
 public:

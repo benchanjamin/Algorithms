@@ -76,9 +76,9 @@ public:
     void add(T item);
 
     /**
-     * Returns a string representation of this queue.
+     * Returns a string representation of this bag.
      *
-     * @return the sequence of items in FIFO order, separated by spaces
+     * @return the sequence of items in random order, separated by spaces
      */
     [[nodiscard]] std::string toString() const;
 

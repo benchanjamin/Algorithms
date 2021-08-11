@@ -9,15 +9,30 @@ using namespace std;
 template<typename T> requires Comparable<T>
 class ShellSort {
 public:
-    explicit ShellSort<T>(span<T> a, bool reverse = true) {
-        if (reverse) {
-            int n = a.size();
-            int h = 1;
-            while (h < n / 3)
-                h = 3 * h + 1;
+    /**
+     * Rearranges the container in ascending order, using the natural order, or descending order.
+     *
+     * @param a, the container to be sorted
+     * @param a boolean specifying whether it should be reverse
+     */
+    explicit ShellSort<T>(span<T> a, bool reverse = false) {
+        int n = a.size();
+        int h = 1;
+        while (h < n / 3)
+            h = 3 * h + 1;
+        if (!reverse) {
             while (h >= 1) {
                 for (int i = h; i < n; i++) {
                     for (int j = i; j >= h && (a[j] < a[j - h]); j -= h) {
+                        exch(a, j, j - h);
+                    }
+                }
+                h /= 3;
+            }
+        } else {
+            while (h >= 1) {
+                for (int i = h; i < n; i++) {
+                    for (int j = i; j >= h && (a[j] > a[j - h]); j -= h) {
                         exch(a, j, j - h);
                     }
                 }
@@ -43,6 +58,7 @@ void ShellSort<T>::exch(span<T> a, int i, int j) {
 }
 
 template<typename T>
+requires Comparable<T>
 bool ShellSort<T>::isHsorted(span<T> a, int h) {
     int length = a.size();
     for (int i = h; i < length; i++)

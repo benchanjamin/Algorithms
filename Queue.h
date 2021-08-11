@@ -145,7 +145,7 @@ public:
 
         // Overload for the postincrement operator ++
         inline Iterator operator++(int) {
-            Iterator temp = *this;
+            Iterator temp(*this);
             operator++();
             return temp;
         }
@@ -210,8 +210,10 @@ template<typename T>
 void Queue<T>::enqueue(T item) {
     Node *oldLast = last;
     last = new Node(item);
-    if (isEmpty()) first = last;
-    else oldLast->next = last;
+    if (isEmpty()) {
+        first = last;
+    } else
+        oldLast->next = last;
     n++;
 }
 
@@ -243,6 +245,7 @@ std::string Queue<T>::toString() const {
     return ss.str();
 }
 
+/// Overload the "<<" operator
 template<typename T>
 std::ostream &operator<<(std::ostream &os, const Queue<T> &queue) {
     return os << queue.toString();

@@ -27,9 +27,7 @@ int main() {
         }
         testFile.close();
         cout << "size of bag = " << bag.size() << endl;
-
         cout << "Items in the bag: " << bag;
-
     }
     auto t1 = high_resolution_clock::now();
 
@@ -75,8 +73,11 @@ int main() {
             else if (!stack.isEmpty())
                 cout << stack.pop() + " ";
         }
+        cout << endl;
         testFile.close();
     }
+
+    cout << "Remaining Items in the Stack: " << stack;
 
     cout << endl;
     t1 = high_resolution_clock::now();

@@ -18,7 +18,7 @@ int main() {
 
     time_point<high_resolution_clock> t0;
 
-    ifstream testFile("./Test Files/tobe.txt");
+    ifstream testFile("./Test Files/to_be.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         string input;
@@ -38,7 +38,7 @@ int main() {
     Queue<string> queue;
 
     testFile.clear();
-    testFile.open("./Test Files/tobe.txt");
+    testFile.open("./Test Files/to_be.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         string input;
@@ -63,7 +63,7 @@ int main() {
     Stack<string> stack;
 
     testFile.clear();
-    testFile.open("./Test Files/tobe.txt");
+    testFile.open("./Test Files/to_be.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         string input;
@@ -86,7 +86,7 @@ int main() {
 
     // Tests the union-find (weighted)
     testFile.clear();
-    testFile.open("./Test Files/tinyUF.txt");
+    testFile.open("./Test Files/tiny_UF.txt");
     if (testFile.is_open()) {
         t0 = high_resolution_clock::now();
         int size;
@@ -110,7 +110,7 @@ int main() {
 
     // Tests the selection sort algorithm on strings
     testFile.clear();
-    testFile.open("./Test Files/randomStrings.txt");
+    testFile.open("./Test Files/random_strings.txt");
     vector<string> stringVector;
     if (testFile.is_open()) {
         string str;
@@ -131,7 +131,7 @@ int main() {
 
     // Tests the selection sort algorithm on ints
     testFile.clear();
-    testFile.open("./Test Files/randomNumbers.txt");
+    testFile.open("./Test Files/random_numbers.txt");
     vector<int> intVector;
     if (testFile.is_open()) {
         int number;
@@ -174,7 +174,7 @@ int main() {
 
     // Tests the insertion sort algorithm on strings
     testFile.clear();
-    testFile.open("./Test Files/randomStrings.txt");
+    testFile.open("./Test Files/random_strings.txt");
     vector<string> stringVector2;
     if (testFile.is_open()) {
         string str;

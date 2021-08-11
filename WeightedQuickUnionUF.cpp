@@ -1,9 +1,9 @@
 //
 // Created by Ben Chan on 7/31/21.
 //
-#include "WeightedUF.h"
+#include "WeightedQuickUnionUF.h"
 
-int WeightedUF::find(int p) {
+int WeightedQuickUnionUF::find(int p) {
     validate(p);
     while (p != parent[p]) {
         parent[p] = parent[parent[p]];
@@ -13,13 +13,13 @@ int WeightedUF::find(int p) {
 }
 
 
-void WeightedUF::validate(int p) {
+void WeightedQuickUnionUF::validate(int p) {
     int n = (int) parent.size();
     if (p < 0 || p >= n)
         throw invalid_argument("index " + to_string(p) + " is not between 0 and " + to_string(n - 1));
 }
 
-void WeightedUF::weightedUnion(int p, int q) {
+void WeightedQuickUnionUF::weightedUnion(int p, int q) {
     int rootP = find(p);
     int rootQ = find(q);
     if (rootP == rootQ) return;
@@ -34,7 +34,8 @@ void WeightedUF::weightedUnion(int p, int q) {
     thisCount--;
 }
 
-WeightedUF::WeightedUF(int n) : thisCount(n) {
+WeightedQuickUnionUF::WeightedQuickUnionUF(int n) : thisCount(n) {
+    if (n < 0) throw invalid_argument("n is less than zero.");
     parent.resize(n);
     rank.resize(n);
     for (int i = 0; i < n; i++) {

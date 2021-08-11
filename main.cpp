@@ -3,7 +3,7 @@
 #include "Bag.h"
 #include "Queue.h"
 #include "Stack.h"
-#include "WeightedUF.h"
+#include "WeightedQuickUnionUF.h"
 #include "SelectionSort.h"
 #include "InsertionSort.h"
 
@@ -91,7 +91,7 @@ int main() {
         t0 = high_resolution_clock::now();
         int size;
         testFile >> size;
-        WeightedUF uf = WeightedUF(size);
+        WeightedQuickUnionUF uf = WeightedQuickUnionUF(size);
         int p;
         int q;
         while (testFile >> p && testFile >> q) {
@@ -106,7 +106,7 @@ int main() {
     }
     t1 = high_resolution_clock::now();
 
-    cout << "Finished WeightedUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+    cout << "Finished WeightedQuickUnionUF: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
     // Tests the selection sort algorithm on strings
     testFile.clear();

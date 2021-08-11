@@ -35,6 +35,7 @@ private:
 };
 
 template<typename T>
+requires Comparable<T>
 void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi) {
     if (hi <= lo) return;
     int mid = lo + (hi - lo) / 2;
@@ -44,6 +45,7 @@ void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi) {
 }
 
 template<typename T>
+requires Comparable<T>
 void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int hi) {
     // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
     assert(isSorted(a, lo, mid));

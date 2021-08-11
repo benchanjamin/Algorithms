@@ -20,46 +20,50 @@ public:
         assert(isSorted(a, lo, mid));
         assert(isSorted(a, mid + 1, hi));
 
-        if (!reverse) {
-            int n = a.size();
-            for (int i = 0; i < n; i++) {
-                int min = i;
-                for (int j = i + 1; j < n; j++) {
-                    if (a[j] < a[min]) min = j;
-                }
-                exch(a, i, min);
-                assert(isSorted(a, 0, i, reverse));
-            }
-        } else {
-            int n = a.size();
-            for (int i = 0; i < n; i++) {
-                int max = i;
-                for (int j = i + 1; j < n; j++) {
-                    if (a[j] > a[max]) max = j;
-                }
-                exch(a, i, max);
-                assert(isSorted(a, 0, i, reverse));
-            }
+        // copy to aux[]
+        for (int k = lo; k <= hi; k++) {
+            aux[k] = a[k];
         }
-        assert(isSorted(a, reverse));
+
+        // merge back to a[]
+        int i = lo, j = mid + 1;
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid) a[k] = aux[j++];
+            else if (j > hi) a[k] = aux[i++];
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];
+            else a[k] = aux[i++];
+        }
+
+        // postcondition: a[lo .. hi] is sorted
+        assert(isSorted(a, lo, hi));
     };
 private:
-    // exchange a[i] and a[j]
-    static void exch(span<T> a, int i, int j);
+    // private helper sort
+    void sort(span<T> a, span<T> aux, int lo, int hi);
 
     // check if entire container is sorted -- useful for debugging
-    static bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
+    bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
 
     // check if container is sorted between two indices, lo and hi -- useful for debugging
-    static bool isSorted(span<T> a, bool reverse = false);
+    bool isSorted(span<T> a, bool reverse = false);
 };
 
 template<typename T>
-requires Comparable<T>
-void MergeSort<T>::exch(span<T> a, int i, int j) {
-    T swap = a[i];
-    a[i] = a[j];
-    a[j] = swap;
+void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi) {
+    if (hi <= lo) return;
+    int mid = lo + (hi - lo) / 2;
+    sort(a, aux, lo, mid);
+    sort(a, aux, mid + 1, hi);
+    merge(a, aux, lo, mid, hi);
+}
+
+template<typename T>
+void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int hi) {
+    if (hi <= lo) return;
+    int mid = lo + (hi - lo) / 2;
+    sort(a, aux, lo, mid);
+    sort(a, aux, mid + 1, hi);
+    merge(a, aux, lo, mid, hi);
 }
 
 template<typename T>

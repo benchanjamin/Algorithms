@@ -7,6 +7,7 @@
 #include "SelectionSort.h"
 #include "InsertionSort.h"
 #include "ShellSort.h"
+#include "MergeSort.h"
 
 
 using namespace std;
@@ -359,5 +360,48 @@ int main() {
     cout << endl;
 
     cout << "Finished Shell Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the insertion sort algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector7;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector7.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSort{stringVector7};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector7) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Merge Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the insertion sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector7;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector7.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSort{intVector7};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector7) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Merge Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
 }
 

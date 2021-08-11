@@ -16,16 +16,16 @@ public:
      * @param a boolean specifying whether it should be reverse
      */
     explicit MergeSort<T>(span<T> a, bool reverse = false) {
-        std::array<T, a.size()> aux;
-        sort(a, aux, 0, a.length - 1);
+        std::vector<T> aux(a.size());
+        sort(a, aux, 0, a.size() - 1);
         assert(isSorted(a));
     };
 private:
     // private helper sort
     void sort(span<T> a, span<T> aux, int lo, int hi);
 
-    // exchange a[i] and a[j]
-    void exch(span<T> a, int i, int j);
+    // merge the two sub-arrays
+    void merge(span<T> a, span<T> aux, int lo, int mid, int hi);
 
     // check if entire container is sorted -- useful for debugging
     bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
@@ -46,7 +46,7 @@ void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi) {
 
 template<typename T>
 requires Comparable<T>
-void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int hi) {
+void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi) {
     // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
     assert(isSorted(a, lo, mid));
     assert(isSorted(a, mid + 1, hi));
@@ -61,20 +61,12 @@ void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int hi) {
     for (int k = lo; k <= hi; k++) {
         if (i > mid) a[k] = aux[j++];
         else if (j > hi) a[k] = aux[i++];
-        else if (less(aux[j], aux[i])) a[k] = aux[j++];
+        else if (aux[j] < aux[i]) a[k] = aux[j++];
         else a[k] = aux[i++];
     }
 
     // postcondition: a[lo .. hi] is sorted
     assert(isSorted(a, lo, hi));
-}
-
-template<typename T>
-requires Comparable<T>
-void MergeSort<T>::exch(span<T> a, int i, int j) {
-    T swap = a[i];
-    a[i] = a[j];
-    a[j] = swap;
 }
 
 template<typename T>

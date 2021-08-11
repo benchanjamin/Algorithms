@@ -1,37 +1,44 @@
 #ifndef ALGORITHMS_INSERTIONSORT_H
 #define ALGORITHMS_INSERTIONSORT_H
 
-#include <span>
-#include "Comparable.h"
+#include <span>             // std::span, std::array, std::vector
+#include "Comparable.h"     // includes Comparable concept used as a constraint
 
 using namespace std;
 
 /**
- *  The {@code Insertion} class provides static methods for sorting an
- *  array using insertion sort.
+ *  The {@code Insertion} class provides a constructor and static methods for sorting a
+ *  container using insertion sort.
  *
- *  In the worst case, this implementation makes ~ &frac12; <em>n</em><sup>2</sup>
- *  compares and ~ &frac12; <em>n</em><sup>2</sup> exchanges to sort an array
- *  of length <em>n</em>. So, it is not suitable for sorting large arbitrary
+ *  In the worst case, this implementation makes ~ ½ n^2
+ *  compares and ~ ½ n^2 exchanges to sort a container
+ *  of length n. So, it is not suitable for sorting large arbitrary
  *  arrays. More precisely, the number of exchanges is exactly equal to the
- *  number of inversions. So, for example, it sorts a partially-sorted array
+ *  number of inversions. So, for example, it sorts a partially-sorted container
  *  in linear time.
- *  <p>
- *  This sorting algorithm is stable.
- *  It uses &Theta;(1) extra memory (not including the input array).
- *  <p>
- *  See <a href="https://algs4.cs.princeton.edu/21elementary/InsertionPedantic.java.html">InsertionPedantic.java</a>
- *  for a version that eliminates the compiler warning.
- *  <p>
- *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ *  This sorting algorithm is stable.
+ *  It uses Θ(1) extra memory (not including the input array).
+ *
+ *  @author Benjamin Chan
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/25applications/Insertion.java.html.
+ *
+ *  @param <T> the generic type of an item in this sorting algorithm
  */
 template<typename T> requires Comparable<T>
 class InsertionSort {
 public:
+    /**
+     * Rearranges the container in ascending order, using the natural order, or descending order.
+     *
+     * @param a, the container to be sorted
+     * @param a boolean specifying whether it should be reverse
+     */
     explicit InsertionSort<T>(span<T> a, bool reverse = false) {
         int n = a.size();
         if (!reverse) {
@@ -53,11 +60,14 @@ public:
     };
 
 private:
-    static void exch(span<T> a, int i, int j);
+    // exchange a[i] and a[j]
+    void exch(span<T> a, int i, int j);
 
-    static bool isSorted(span<T> a, bool reverse);
+    // check if entire container is sorted -- useful for debugging
+    bool isSorted(span<T> a, bool reverse);
 
-    static bool isSorted(span<T> a, int lo, int hi, bool reverse);
+    // check if container is sorted between two indices, lo and hi -- useful for debugging
+    bool isSorted(span<T> a, int lo, int hi, bool reverse);
 };
 
 template<typename T>
@@ -89,6 +99,10 @@ bool InsertionSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
     }
 }
 
+/**
+ * Deduct the type, <T>, of the InsertionSort class based on constructor argument types
+ * and number of arguments
+ */
 template<typename T> requires Comparable<T>
 InsertionSort(span<T>) -> InsertionSort<T>;
 

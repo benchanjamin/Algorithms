@@ -72,7 +72,11 @@ public:
     */
     void add(T item);
 
-
+    /**
+     * Returns a string representation of this queue.
+     *
+     * @return the sequence of items in FIFO order, separated by spaces
+     */
     [[nodiscard]] std::string toString() const;
 
     /// Nested iterator class

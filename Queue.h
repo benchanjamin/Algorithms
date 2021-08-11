@@ -93,6 +93,13 @@ public:
      */
     T dequeue();
 
+    /**
+     * Returns a string representation of this queue.
+     *
+     * @return the sequence of items in FIFO order, separated by spaces
+     */
+    [[nodiscard]] std::string toString() const;
+
     class Iterator {
         friend class Queue<T>;
 
@@ -131,15 +138,23 @@ public:
         }
     }; // End of inner class iterator
 
+    /**
+     * Returns an iterator that points to the first node of the queue.
+     *
+     * @return an iterator that points to the first node of the queue
+     */
     inline Iterator begin() const {
         return Iterator(first);
     }
 
+    /**
+     * Returns an iterator that points to the past-the-end node after the last node of the queue.
+     *
+     * @return an iterator that points to the past-the-end node after the last node of the queue
+     */
     inline Iterator end() const {
         return Iterator(last->next);
     }
-
-    [[nodiscard]] std::string toString() const;
 
 private:
     // helper linked list class

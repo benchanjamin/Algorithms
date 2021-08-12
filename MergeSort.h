@@ -16,7 +16,8 @@ public:
      * @param a boolean specifying whether it should be reverse
      */
     explicit MergeSort<T>(span<T> a, bool reverse = false) {
-        std::vector<T> aux(a.size());
+        int length = a.size();
+        std::vector<T> aux(length);
         sort(a, aux, 0, a.size() - 1);
         assert(isSorted(a));
     };
@@ -59,10 +60,15 @@ void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi) {
     // merge back to a[]
     int i = lo, j = mid + 1;
     for (int k = lo; k <= hi; k++) {
-        if (i > mid) a[k] = aux[j++];
-        else if (j > hi) a[k] = aux[i++];
-        else if (aux[j] < aux[i]) a[k] = aux[j++];
-        else a[k] = aux[i++];
+        if (i > mid) {
+            a[k] = aux[j++];
+        } else if (j > hi) {
+            a[k] = aux[i++];
+        } else if (aux[j] < aux[i]) {
+            a[k] = aux[j++];
+        } else {
+            a[k] = aux[i++];
+        }
     }
 
     // postcondition: a[lo .. hi] is sorted
@@ -81,11 +87,11 @@ requires Comparable<T>
 bool MergeSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
     if (!reverse) {
         for (int i = 1; i <= hi; i++)
-            if (a[i] < a[i - 1]) return false;
+            if (a[i] > a[i - 1]) return false;
         return true;
     } else {
         for (int i = 1; i <= hi; i++)
-            if (a[i] > a[i - 1]) return false;
+            if (a[i] < a[i - 1]) return false;
         return true;
     }
 }

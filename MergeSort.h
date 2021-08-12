@@ -2,7 +2,7 @@
 #define ALGORITHMS_MERGESORT_H
 
 #include <span>                 // std::span, std::array, std::vector
-#include "Comparable.hpp"         // includes Comparable concept used as a constraint
+#include "Comparable.hpp"       // includes Comparable concept used as a constraint
 
 using namespace std;
 

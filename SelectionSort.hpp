@@ -7,8 +7,9 @@
 using namespace std;
 
 /**
- * The {@code SelectionSort} class provides static methods for sorting an
- * array using selection sort.
+ * The {@code SelectionSort} class sorts a container through invoking its
+ * constructor with the container variable.
+ *
  * This implementation makes ~ ½ n^2 compares to sort
  * any array of length n, so it is not suitable for sorting large arrays.
  * It performs exactly n exchanges.
@@ -58,13 +59,13 @@ public:
     };
 private:
     // exchange a[i] and a[j]
-    static void exch(span<T> a, int i, int j);
+    void exch(span<T> a, int i, int j);
 
     // check if entire container is sorted -- useful for debugging
-    static bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
+    bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
 
     // check if container is sorted between two indices, lo and hi -- useful for debugging
-    static bool isSorted(span<T> a, bool reverse = false);
+    bool isSorted(span<T> a, bool reverse = false);
 };
 
 template<typename T>

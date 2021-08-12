@@ -7,8 +7,8 @@
 using namespace std;
 
 /**
- *  The {@code InsertionSort} class provides a constructor and static methods for sorting a
- *  container using insertion sort.
+ *  The {@code InsertionSort} class sorts a container through invoking its
+ *  constructor with the container variable.
  *
  *  In the worst case, this implementation makes ~ ½ n^2
  *  compares and ~ ½ n^2 exchanges to sort a container

@@ -10,23 +10,21 @@ using namespace std;
  *  The {@code MergeSort} class sorts a container through invoking its
  *  constructor with the container variable.
  *
- *  This implementation takes &Theta;(<em>n</em> log <em>n</em>) time
- *  to sort any array of length <em>n</em> (assuming comparisons
+ *  This implementation takes Θ(nlog(n)) time
+ *  to sort any array of length n (assuming comparisons
  *  take constant time). It makes between
- *  ~ &frac12; <em>n</em> log<sub>2</sub> <em>n</em> and
- *  ~ 1 <em>n</em> log<sub>2</sub> <em>n</em> compares.
- *  <p>
- *  This sorting algorithm is stable.
- *  It uses &Theta;(<em>n</em>) extra memory (not including the input array).
- *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/22mergesort">Section 2.2</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *  For an optimized version, see {@link MergeX}.
+ *  ~ ½ * n * lg(n) and
+ *  ~ 1 * n * lg(n) compares.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- */
+ *  @author Benjamin Chan
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/22mergesort/Merge.java.html.
+ *
+ * @param <T> the generic type of an item in this sorting algorithm */
 template<typename T> requires Comparable<T>
 class MergeSort {
 public:
@@ -107,12 +105,12 @@ template<typename T>
 requires Comparable<T>
 bool MergeSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
     if (!reverse) {
-        for (int i = 1; i <= hi; i++)
-            if (a[i] > a[i - 1]) return false;
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] < a[i - 1]) return false;
         return true;
     } else {
-        for (int i = 1; i <= hi; i++)
-            if (a[i] < a[i - 1]) return false;
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] > a[i - 1]) return false;
         return true;
     }
 }

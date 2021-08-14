@@ -35,17 +35,10 @@ public:
      * @param a boolean specifying whether it should be reverse
      */
     explicit MergeSort<T>(span<T> a, bool reverse = false) {
-        if (!reverse) {
-            int length = a.size();
-            std::vector<T> aux(length);
-            sort(a, aux, 0, a.size() - 1);
-            assert(isSorted(a));
-        } else {
-            int length = a.size();
-            std::vector<T> aux(length);
-            sort(a, aux, 0, a.size() - 1, true);
-            assert(isSorted(a, true));
-        }
+        int length = a.size();
+        std::vector<T> aux(length);
+        sort(a, aux, 0, a.size() - 1, reverse);
+        assert(isSorted(a, reverse));
     };
 private:
     // private helper sort
@@ -66,20 +59,17 @@ requires Comparable<T>
 void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi, bool reverse) {
     if (hi <= lo) return;
     int mid = lo + (hi - lo) / 2;
-    sort(a, aux, lo, mid);
-    sort(a, aux, mid + 1, hi);
-    if (!reverse)
-        merge(a, aux, lo, mid, hi, false);
-    else
-        merge(a, aux, lo, mid, hi, true);
+    sort(a, aux, lo, mid, reverse);
+    sort(a, aux, mid + 1, hi, reverse);
+    merge(a, aux, lo, mid, hi, reverse);
 }
 
 template<typename T>
 requires Comparable<T>
 void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool reverse) {
     // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
-    assert(isSorted(a, lo, mid));
-    assert(isSorted(a, mid + 1, hi));
+    assert(isSorted(a, lo, mid, reverse));
+    assert(isSorted(a, mid + 1, hi, reverse));
 
     // copy to aux[]
     for (int k = lo; k <= hi; k++) {
@@ -140,7 +130,7 @@ bool MergeSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
 }
 
 /**
- * Deduct the type, <T>, of the InsertionSort class based on constructor argument types
+ * Deduct the type, <T>, of the MergeSort class based on constructor argument types
  * and number of arguments
  */
 template<typename T> requires Comparable<T>

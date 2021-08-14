@@ -423,5 +423,26 @@ int main() {
     cout << endl;
 
     cout << "Finished Merge Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the merge reverse sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector8;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector8.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSort{intVector8, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector8) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Merge Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 }
 

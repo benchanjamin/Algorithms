@@ -26,7 +26,7 @@ using namespace std;
  *
  * @param <T> the generic type of an item in this sorting algorithm */
 template<typename T> requires Comparable<T>
-class MergeSort {
+class MergeSortBU {
 public:
     /**
      * Rearranges the container in ascending order, using the natural order, or descending order.
@@ -34,7 +34,7 @@ public:
      * @param a, the container to be sorted
      * @param a boolean specifying whether it should be reverse
      */
-    explicit MergeSort<T>(span<T> a, bool reverse = false) {
+    explicit MergeSortBU<T>(span<T> a, bool reverse = false) {
         int length = a.size();
         std::vector<T> aux(length);
         sort(a, aux, 0, a.size() - 1, reverse);
@@ -56,7 +56,7 @@ private:
 
 template<typename T>
 requires Comparable<T>
-void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi, bool reverse) {
+void MergeSortBU<T>::sort(span<T> a, span<T> aux, int lo, int hi, bool reverse) {
     if (hi <= lo) return;
     int mid = lo + (hi - lo) / 2;
     sort(a, aux, lo, mid, reverse);
@@ -66,7 +66,7 @@ void MergeSort<T>::sort(span<T> a, span<T> aux, int lo, int hi, bool reverse) {
 
 template<typename T>
 requires Comparable<T>
-void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool reverse) {
+void MergeSortBU<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool reverse) {
     // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
     assert(isSorted(a, lo, mid, reverse));
     assert(isSorted(a, mid + 1, hi, reverse));
@@ -110,14 +110,14 @@ void MergeSort<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool r
 
 template<typename T>
 requires Comparable<T>
-bool MergeSort<T>::isSorted(span<T> a, bool reverse) {
+bool MergeSortBU<T>::isSorted(span<T> a, bool reverse) {
     return isSorted(a, 0, a.size() - 1, reverse);
 }
 
 
 template<typename T>
 requires Comparable<T>
-bool MergeSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
+bool MergeSortBU<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
     if (!reverse) {
         for (int i = lo + 1; i <= hi; i++)
             if (a[i] < a[i - 1]) return false;
@@ -134,27 +134,27 @@ bool MergeSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
  * and number of arguments
  */
 template<typename T> requires Comparable<T>
-MergeSort(span<T>) -> MergeSort<T>;
+MergeSortBU(span<T>) -> MergeSortBU<T>;
 
 template<typename T> requires Comparable<T>
-MergeSort(vector<T>) -> MergeSort<T>;
+MergeSortBU(vector<T>) -> MergeSortBU<T>;
 
 template<typename T, size_t SIZE> requires Comparable<T>
-MergeSort(array<T, SIZE>) -> MergeSort<T>;
+MergeSortBU(array<T, SIZE>) -> MergeSortBU<T>;
 
 template<typename T> requires Comparable<T>
-MergeSort(T a[]) -> MergeSort<T>;
+MergeSortBU(T a[]) -> MergeSortBU<T>;
 
 template<typename T> requires Comparable<T>
-MergeSort(span<T>, bool reverse) -> MergeSort<T>;
+MergeSortBU(span<T>, bool reverse) -> MergeSortBU<T>;
 
 template<typename T> requires Comparable<T>
-MergeSort(vector<T>, bool reverse) -> MergeSort<T>;
+MergeSortBU(vector<T>, bool reverse) -> MergeSortBU<T>;
 
 template<typename T, size_t SIZE> requires Comparable<T>
-MergeSort(array<T, SIZE>, bool reverse) -> MergeSort<T>;
+MergeSortBU(array<T, SIZE>, bool reverse) -> MergeSortBU<T>;
 
 template<typename T> requires Comparable<T>
-MergeSort(T a[], bool reverse) -> MergeSort<T>;
+MergeSortBU(T a[], bool reverse) -> MergeSortBU<T>;
 
 #endif //ALGORITHMS_MERGESORTBU_HPP

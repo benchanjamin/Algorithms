@@ -49,7 +49,7 @@ public:
                 merge(a, aux, lo, mid, hi, reverse);
             }
         }
-        assert(isSorted(a));
+        assert(isSorted(a, reverse));
     };
 private:
 

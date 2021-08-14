@@ -478,7 +478,7 @@ int main() {
         }
         testFile.close();
         t0 = high_resolution_clock::now();
-        MergeSortBU{intVector9, true};
+        MergeSortBU{intVector9};
     }
     t1 = high_resolution_clock::now();
     for (const auto &x: intVector9) {

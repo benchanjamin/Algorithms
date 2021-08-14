@@ -3,6 +3,7 @@
 
 #include <span>                 // std::span, std::array, std::vector
 #include "Comparable.hpp"       // includes Comparable concept used as a constraint
+#include <algorithm>            // std::min
 
 using namespace std;
 
@@ -39,12 +40,12 @@ public:
      * @param a boolean specifying whether it should be reverse
      */
     explicit MergeSortBU<T>(span<T> a, bool reverse = false) {
-        int length = a.size();
-        vector<T> aux(length);
+        int n = a.size();
+        vector<T> aux(n);
         for (int len = 1; len < n; len *= 2) {
             for (int lo = 0; lo < n - len; lo += len + len) {
                 int mid = lo + len - 1;
-                int hi = Math.min(lo + len + len - 1, n - 1);
+                int hi = min(lo + len + len - 1, n - 1);
                 merge(a, aux, lo, mid, hi, reverse);
             }
         }

@@ -7,7 +7,7 @@
 #include "SelectionSort.hpp"
 #include "InsertionSort.hpp"
 #include "ShellSort.hpp"
-#include "MergeSort.h"
+#include "MergeSort.hpp"
 
 
 using namespace std;

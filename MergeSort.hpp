@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_MERGESORT_H
-#define ALGORITHMS_MERGESORT_H
+#ifndef ALGORITHMS_MERGESORT_HPP
+#define ALGORITHMS_MERGESORT_HPP
 
 #include <span>                 // std::span, std::array, std::vector
 #include "Comparable.hpp"       // includes Comparable concept used as a constraint
@@ -143,4 +143,4 @@ MergeSort(array<T, SIZE>, bool reverse) -> MergeSort<T>;
 template<typename T> requires Comparable<T>
 MergeSort(T a[], bool reverse) -> MergeSort<T>;
 
-#endif //ALGORITHMS_MERGESORT_H
+#endif //ALGORITHMS_MERGESORT_HPP

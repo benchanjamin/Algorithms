@@ -7,7 +7,8 @@
 using namespace std;
 
 /**
- *  The {@code InsertionSort} class sorts a container through invoking its
+ *  The {@code InsertionSort} class uses insertion sort
+ *  to sort a container through invoking its
  *  constructor with the container variable.
  *
  *  In the worst case, this implementation makes ~ ½ n^2

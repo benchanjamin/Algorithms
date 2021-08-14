@@ -7,7 +7,8 @@
 using namespace std;
 
 /**
- *  The {@code MergeSort} class sorts a container through invoking its
+ *  The {@code MergeSort} class uses merge-sort to sort
+ *  a container through invoking its
  *  constructor with the container variable.
  *
  *  This implementation takes Θ(nlog(n)) time

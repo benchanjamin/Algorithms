@@ -7,7 +7,8 @@
 using namespace std;
 
 /**
- * The {@code SelectionSort} class sorts a container through invoking its
+ * The {@code SelectionSort} class uses selection sort to
+ * sort a container through invoking its
  * constructor with the container variable.
  *
  * This implementation makes ~ ½ n^2 compares to sort

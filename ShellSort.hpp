@@ -7,9 +7,9 @@
 using namespace std;
 
 /**
- *  The {@code ShellSort} class sorts a container through invoking its constructor
- *  with the container variable and by
- *  using Shellsort with
+ *  The {@code ShellSort} class use shell-sort to sort
+ *  a container through invoking its constructor
+ *  with the container variable and with
  *  Knuth's increment sequence
  *  (1, 4, 13, 40, ...). In the worst case, this implementation makes
  *  Θ(n^(3/2)) compares and exchanges to sort

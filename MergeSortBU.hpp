@@ -8,7 +8,8 @@
 using namespace std;
 
 /**
- *  The {@code MergeSortBU} class sorts a container through invoking its
+ *  The {@code MergeSortBU} class uses merge-sort (bottom-up) to sort
+ *  a container through invoking its
  *  constructor with the container variable. It is non-recursive.
  *
  *  This implementation takes Θ(n * log(n)) time

@@ -445,5 +445,48 @@ int main() {
     cout << endl;
 
     cout << "Finished Merge Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the merge sort bottom-up algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector9;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector9.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSortBU{stringVector9};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector9) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Merge Sort Bottom-Up: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the merge sort bottom-up algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector9;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector9.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSortBU{intVector9, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector9) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Merge Sort Bottom-Up: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
 }
 

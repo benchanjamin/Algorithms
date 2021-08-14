@@ -7,14 +7,17 @@
 using namespace std;
 
 /**
- *  The {@code MergeSort} class sorts a container through invoking its
- *  constructor with the container variable.
+ *  The {@code MergeSortBU} class sorts a container through invoking its
+ *  constructor with the container variable. It is non-recursive.
  *
- *  This implementation takes Θ(nlog(n)) time
- *  to sort any array of length n (assuming comparisons
+ *  This implementation takes &Theta;(<em>n</em> log <em>n</em>) time
+ *  to sort any array of length <em>n</em> (assuming comparisons
  *  take constant time). It makes between
- *  ~ ½ * n * lg(n) and
- *  ~ 1 * n * lg(n) compares.
+ *  ~ &frac12; <em>n</em> log<sub>2</sub> <em>n</em> and
+ *  ~ 1 <em>n</em> log<sub>2</sub> <em>n</em> compares.
+ *
+ *  This sorting algorithm is stable.
+ *  It uses &Theta;(<em>n</em>) extra memory (not including the input array).
  *
  *  @author Benjamin Chan
  *
@@ -22,9 +25,10 @@ using namespace std;
  *  and their booksite https://algs4.cs.princeton.edu/
  *
  *  The Java program from which this C++ code was adapted from is found at
- *  https://algs4.cs.princeton.edu/22mergesort/Merge.java.html.
+ *  https://algs4.cs.princeton.edu/25applications/Insertion.java.html.
  *
- * @param <T> the generic type of an item in this sorting algorithm */
+ *  @param <T> the generic type of an item in this sorting algorithm
+ */
 template<typename T> requires Comparable<T>
 class MergeSortBU {
 public:

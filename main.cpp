@@ -1,13 +1,14 @@
 #include <chrono>
 #include <fstream>
 #include "Bag.hpp"
-#include "Queue.h"
+#include "Queue.hpp"
 #include "Stack.hpp"
 #include "WeightedQuickUnionUF.hpp"
 #include "SelectionSort.hpp"
 #include "InsertionSort.hpp"
 #include "ShellSort.hpp"
 #include "MergeSort.hpp"
+#include "MergeSortBU.hpp"
 
 
 using namespace std;

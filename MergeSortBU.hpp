@@ -10,14 +10,14 @@ using namespace std;
  *  The {@code MergeSortBU} class sorts a container through invoking its
  *  constructor with the container variable. It is non-recursive.
  *
- *  This implementation takes &Theta;(<em>n</em> log <em>n</em>) time
- *  to sort any array of length <em>n</em> (assuming comparisons
+ *  This implementation takes Θ(n * log(n)) time
+ *  to sort any array of length n (assuming comparisons
  *  take constant time). It makes between
- *  ~ &frac12; <em>n</em> log<sub>2</sub> <em>n</em> and
- *  ~ 1 <em>n</em> log<sub>2</sub> <em>n</em> compares.
+ *  ~ ½ * n * lg(n) and
+ *  ~ 1 * n * lg(n) compares.
  *
  *  This sorting algorithm is stable.
- *  It uses &Theta;(<em>n</em>) extra memory (not including the input array).
+ *  It uses Θ(n) extra memory (not including the input array).
  *
  *  @author Benjamin Chan
  *
@@ -25,7 +25,7 @@ using namespace std;
  *  and their booksite https://algs4.cs.princeton.edu/
  *
  *  The Java program from which this C++ code was adapted from is found at
- *  https://algs4.cs.princeton.edu/25applications/Insertion.java.html.
+ *  https://algs4.cs.princeton.edu/22mergesort/MergeBU.java.html.
  *
  *  @param <T> the generic type of an item in this sorting algorithm
  */
@@ -40,13 +40,17 @@ public:
      */
     explicit MergeSortBU<T>(span<T> a, bool reverse = false) {
         int length = a.size();
-        std::vector<T> aux(length);
-        sort(a, aux, 0, a.size() - 1, reverse);
-        assert(isSorted(a, reverse));
+        vector<T> aux(length);
+        for (int len = 1; len < n; len *= 2) {
+            for (int lo = 0; lo < n - len; lo += len + len) {
+                int mid = lo + len - 1;
+                int hi = Math.min(lo + len + len - 1, n - 1);
+                merge(a, aux, lo, mid, hi, reverse);
+            }
+        }
+        assert(isSorted(a));
     };
 private:
-    // private helper sort
-    void sort(span<T> a, span<T> aux, int lo, int hi, bool reverse = false);
 
     // merge the two sub-arrays
     void merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool reverse = false);
@@ -60,21 +64,7 @@ private:
 
 template<typename T>
 requires Comparable<T>
-void MergeSortBU<T>::sort(span<T> a, span<T> aux, int lo, int hi, bool reverse) {
-    if (hi <= lo) return;
-    int mid = lo + (hi - lo) / 2;
-    sort(a, aux, lo, mid, reverse);
-    sort(a, aux, mid + 1, hi, reverse);
-    merge(a, aux, lo, mid, hi, reverse);
-}
-
-template<typename T>
-requires Comparable<T>
 void MergeSortBU<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool reverse) {
-    // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
-    assert(isSorted(a, lo, mid, reverse));
-    assert(isSorted(a, mid + 1, hi, reverse));
-
     // copy to aux[]
     for (int k = lo; k <= hi; k++) {
         aux[k] = a[k];
@@ -84,32 +74,27 @@ void MergeSortBU<T>::merge(span<T> a, span<T> aux, int lo, int mid, int hi, bool
     int i = lo, j = mid + 1;
     if (!reverse) {
         for (int k = lo; k <= hi; k++) {
-            if (i > mid) {
+            if (i > mid)
                 a[k] = aux[j++];
-            } else if (j > hi) {
+            else if (j > hi)
                 a[k] = aux[i++];
-            } else if (aux[j] < aux[i]) {
+            else if (aux[j] < aux[i])
                 a[k] = aux[j++];
-            } else {
+            else
                 a[k] = aux[i++];
-            }
         }
     } else {
         for (int k = lo; k <= hi; k++) {
-            if (i > mid) {
+            if (i > mid)
                 a[k] = aux[j++];
-            } else if (j > hi) {
+            else if (j > hi)
                 a[k] = aux[i++];
-            } else if (aux[j] > aux[i]) {
+            else if (aux[j] > aux[i])
                 a[k] = aux[j++];
-            } else {
+            else
                 a[k] = aux[i++];
-            }
         }
     }
-
-    // postcondition: a[lo .. hi] is sorted
-    assert(isSorted(a, lo, hi, reverse));
 }
 
 template<typename T>

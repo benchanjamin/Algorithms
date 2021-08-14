@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_QUEUE_H
-#define ALGORITHMS_QUEUE_H
+#ifndef ALGORITHMS_QUEUE_HPP
+#define ALGORITHMS_QUEUE_HPP
 
 #include <string>                   // std::string
 #include <sstream>                  // std::stringstream
@@ -251,4 +251,4 @@ std::ostream &operator<<(std::ostream &os, const Queue<T> &queue) {
     return os << queue.toString();
 }
 
-#endif //ALGORITHMS_QUEUE_H
+#endif //ALGORITHMS_QUEUE_HPP

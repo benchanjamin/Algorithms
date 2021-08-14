@@ -11,7 +11,7 @@ using namespace std;
  *  constructor with the container variable.
  *
  *  In the worst case, this implementation makes ~ ½ n^2
- *  compares and ~ ½ n^2 exchanges to sort a container
+ *  compares and ~ ½ * n^2 exchanges to sort a container
  *  of length n. So, it is not suitable for sorting large arbitrary
  *  arrays. More precisely, the number of exchanges is exactly equal to the
  *  number of inversions. So, for example, it sorts a partially-sorted container

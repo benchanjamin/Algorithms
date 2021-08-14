@@ -36,7 +36,7 @@ public:
      */
     explicit MergeSort<T>(span<T> a, bool reverse = false) {
         int length = a.size();
-        std::vector<T> aux(length);
+        vector<T> aux(length);
         sort(a, aux, 0, a.size() - 1, reverse);
         assert(isSorted(a, reverse));
     };

@@ -26,8 +26,8 @@ std::is_convertible_v<From, To> && requires(From (&f)()) {
  */
 template<typename T>
 concept Equal =requires(T a, T b) {
-    { a == b } -> convertible_to<bool>;
-    { a != b } -> convertible_to<bool>;
+    { a == b } -> same_as<bool>;
+    { a != b } -> same_as<bool>;
 };
 
 /**
@@ -39,10 +39,10 @@ concept Equal =requires(T a, T b) {
 template<typename T>
 concept Comparable =
 Equal<T> && requires(T a, T b) {
-    { a <= b } -> convertible_to<bool>;
-    { a < b } -> convertible_to<bool>;
-    { a > b } -> convertible_to<bool>;
-    { a >= b } -> convertible_to<bool>;
+    { a <= b } -> same_as<bool>;
+    { a < b } -> same_as<bool>;
+    { a > b } -> same_as<bool>;
+    { a >= b } -> same_as<bool>;
 };
 
 #endif //ALGORITHMS_COMPARABLE_HPP

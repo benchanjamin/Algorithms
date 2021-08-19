@@ -4,7 +4,6 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-#include <exception>
 #include <stdexcept>
 
 using namespace std;

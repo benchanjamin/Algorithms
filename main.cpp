@@ -550,7 +550,7 @@ int main() {
     }
     cout << endl;
 
-    cout << "Finished Quick: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+    cout << "Finished Quick Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
 }
 

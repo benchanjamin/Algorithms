@@ -83,7 +83,7 @@ void QuickSort3way<T>::sort(span<T> a, int lo, int hi, bool reverse) {
 
 template<typename T>
 requires Comparable<T>
-void QuickSort<T>::exch(span<T> a, int i, int j) {
+void QuickSort3way<T>::exch(span<T> a, int i, int j) {
     T swap = a[i];
     a[i] = a[j];
     a[j] = swap;

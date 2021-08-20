@@ -30,11 +30,11 @@ public:
         random_device rd;
         mt19937 g(rd());
         shuffle(a.begin(), a.end(), g);
-        sort(a, 0, a.size() - 1);
+        sort(a, 0, a.size() - 1, reverse);
         assert(isSorted(a, reverse));
     };
 private:
-    void sort(span<T> a, int lo, int hi);
+    void sort(span<T> a, int lo, int hi, bool reverse = false);
 
     int partition(span<T> a, int lo, int hi, bool reverse = false);
 
@@ -49,9 +49,9 @@ private:
 
 template<typename T>
 requires Comparable<T>
-void QuickSort<T>::sort(span<T> a, int lo, int hi) {
+void QuickSort<T>::sort(span<T> a, int lo, int hi, bool reverse) {
     if (hi <= lo) return;
-    int j = partition(a, lo, hi);
+    int j = partition(a, lo, hi, reverse);
     sort(a, lo, j - 1);
     sort(a, j + 1, hi);
     assert(isSorted(a, lo, hi));
@@ -63,22 +63,41 @@ int QuickSort<T>::partition(span<T> a, int lo, int hi, bool reverse) {
     int i = lo;
     int j = hi + 1;
     T v = a[lo];
-    while (true) {
+    if (!reverse) {
+        while (true) {
 
-        // find item on lo to swap
-        while (less(a[++i], v)) {
-            if (i == hi) break;
+            // find item on lo to swap
+            while (a[++i] < v) {
+                if (i == hi) break;
+            }
+
+            // find item on hi to swap
+            while (v < a[--j]) {
+                if (j == lo) break;      // redundant since a[lo] acts as sentinel
+            }
+
+            // check if pointers cross
+            if (i >= j) break;
+
+            exch(a, i, j);
         }
+    } else {
+        while (true) {
+            // find item on lo to swap
+            while (a[++i] > v) {
+                if (i == hi) break;
+            }
 
-        // find item on hi to swap
-        while (less(v, a[--j])) {
-            if (j == lo) break;      // redundant since a[lo] acts as sentinel
+            // find item on hi to swap
+            while (v > a[--j]) {
+                if (j == lo) break;      // redundant since a[lo] acts as sentinel
+            }
+
+            // check if pointers cross
+            if (i >= j) break;
+
+            exch(a, i, j);
         }
-
-        // check if pointers cross
-        if (i >= j) break;
-
-        exch(a, i, j);
     }
 
     // put partitioning item v at a[j]

@@ -30,16 +30,32 @@ public:
         random_device rd;
         mt19937 g(rd());
         shuffle(a.begin(), a.end(), g);
-        span<T> copy = a;
-        T first = copy[0];
-        T second = copy[1];
-
+        sort(a, 0, a.size() - 1);
+        assert(isSorted(a, reverse));
     };
 private:
+    void sort(span<T> a, int lo, int hi);
+
     int partition(span<T> a, int lo, int hi, bool reverse = false);
 
     void exch(span<T> a, int i, int j);
+
+    // check if entire container is sorted -- useful for debugging
+    bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
+
+    // check if container is sorted between two indices, lo and hi -- useful for debugging
+    bool isSorted(span<T> a, bool reverse = false);
 };
+
+template<typename T>
+requires Comparable<T>
+void QuickSort<T>::sort(span<T> a, int lo, int hi) {
+    if (hi <= lo) return;
+    int j = partition(a, lo, hi);
+    sort(a, lo, j - 1);
+    sort(a, j + 1, hi);
+    assert(isSorted(a, lo, hi));
+}
 
 template<typename T>
 requires Comparable<T>
@@ -78,6 +94,27 @@ void QuickSort<T>::exch(span<T> a, int i, int j) {
     T swap = a[i];
     a[i] = a[j];
     a[j] = swap;
+}
+
+template<typename T>
+requires Comparable<T>
+bool QuickSort<T>::isSorted(span<T> a, bool reverse) {
+    return isSorted(a, 0, a.size() - 1, reverse);
+}
+
+
+template<typename T>
+requires Comparable<T>
+bool QuickSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
+    if (!reverse) {
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] < a[i - 1]) return false;
+        return true;
+    } else {
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] > a[i - 1]) return false;
+        return true;
+    }
 }
 
 /**

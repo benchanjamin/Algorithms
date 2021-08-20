@@ -531,7 +531,7 @@ int main() {
 
     cout << "Finished Merge Sort Bottom-Up: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-    // Tests the quick sort bottom-up algorithm on strings
+    // Tests the quick sort algorithm on strings
     testFile.clear();
     testFile.open("./Test Files/random_strings.txt");
     vector<string> stringVector11;
@@ -551,6 +551,69 @@ int main() {
     cout << endl;
 
     cout << "Finished Quick Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector11;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector11.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        QuickSort{intVector11};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector11) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick reverse sort algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector12;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector12.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSortBU{stringVector12, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector12) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick reverse sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector12;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector12.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        MergeSortBU{intVector12, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector12) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
 }
 

@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_QUICKSORT_HPP
-#define ALGORITHMS_QUICKSORT_HPP
+#ifndef ALGORITHMS_QUICKSORT3WAY_HPP
+#define ALGORITHMS_QUICKSORT3WAY_HPP
 
 #include <span>                 // std::span
 #include <array>                // std::array
@@ -27,9 +27,9 @@ using namespace std;
  */
 
 template<typename T> requires Comparable<T>
-class QuickSort {
+class QuickSort3way {
 public:
-    explicit QuickSort<T>(span<T> a, bool reverse = false) {
+    explicit QuickSort3way<T>(span<T> a, bool reverse = false) {
         random_device rd;
         mt19937 g(rd());
         shuffle(a.begin(), a.end(), g);
@@ -38,8 +38,6 @@ public:
     };
 private:
     void sort(span<T> a, int lo, int hi, bool reverse = false);
-
-    int partition(span<T> a, int lo, int hi, bool reverse = false);
 
     void exch(span<T> a, int i, int j);
 
@@ -52,62 +50,35 @@ private:
 
 template<typename T>
 requires Comparable<T>
-void QuickSort<T>::sort(span<T> a, int lo, int hi, bool reverse) {
-    if (hi <= lo) return;
-    int j = partition(a, lo, hi, reverse);
-    sort(a, lo, j - 1, reverse);
-    sort(a, j + 1, hi, reverse);
-    assert(isSorted(a, lo, hi, reverse));
-}
-
-template<typename T>
-requires Comparable<T>
-int QuickSort<T>::partition(span<T> a, int lo, int hi, bool reverse) {
-    int i = lo;
-    int j = hi + 1;
-    T v = a[lo];
+void QuickSort3way<T>::sort(span<T> a, int lo, int hi, bool reverse) {
     if (!reverse) {
-        while (true) {
-
-            // find item on lo to swap
-            while (a[++i] < v) {
-                if (i == hi) break;
-            }
-
-            // find item on hi to swap
-            while (v < a[--j]) {
-                if (j == lo) break;      // redundant since a[lo] acts as sentinel
-            }
-
-            // check if pointers cross
-            if (i >= j) break;
-
-            exch(a, i, j);
+        if (hi <= lo) return;
+        int lt = lo, gt = hi;
+        T v = a[lo];
+        int i = lo + 1;
+        while (i <= gt) {
+            int cmp = a[i].compareTo(v);
+            if (cmp < 0) exch(a, lt++, i++);
+            else if (cmp > 0) exch(a, i, gt--);
+            else i++;
         }
     } else {
-        while (true) {
-            // find item on lo to swap
-            while (a[++i] > v) {
-                if (i == hi) break;
-            }
-
-            // find item on hi to swap
-            while (v > a[--j]) {
-                if (j == lo) break;      // redundant since a[lo] acts as sentinel
-            }
-
-            // check if pointers cross
-            if (i >= j) break;
-
-            exch(a, i, j);
+        if (hi <= lo) return;
+        int lt = lo, gt = hi;
+        T v = a[lo];
+        int i = lo + 1;
+        while (i <= gt) {
+            int cmp = a[i].compareTo(v);
+            if (cmp > 0) exch(a, lt++, i++);
+            else if (cmp < 0) exch(a, i, gt--);
+            else i++;
         }
     }
 
-    // put partitioning item v at a[j]
-    exch(a, lo, j);
-
-    // now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
-    return j;
+    // a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi].
+    sort(a, lo, lt - 1, reverse);
+    sort(a, gt + 1, hi, reverse);
+    assert(isSorted(a, lo, hi, reverse));
 }
 
 template<typename T>
@@ -120,14 +91,13 @@ void QuickSort<T>::exch(span<T> a, int i, int j) {
 
 template<typename T>
 requires Comparable<T>
-bool QuickSort<T>::isSorted(span<T> a, bool reverse) {
+bool QuickSort3way<T>::isSorted(span<T> a, bool reverse) {
     return isSorted(a, 0, a.size() - 1, reverse);
 }
 
-
 template<typename T>
 requires Comparable<T>
-bool QuickSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
+bool QuickSort3way<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
     if (!reverse) {
         for (int i = lo + 1; i <= hi; i++)
             if (a[i] < a[i - 1]) return false;
@@ -144,27 +114,27 @@ bool QuickSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
  * and number of arguments
  */
 template<typename T> requires Comparable<T>
-QuickSort(span<T>) -> QuickSort<T>;
+QuickSort3way(span<T>) -> QuickSort3way<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(vector<T>) -> QuickSort<T>;
+QuickSort3way(vector<T>) -> QuickSort3way<T>;
 
 template<typename T, size_t SIZE> requires Comparable<T>
-QuickSort(array<T, SIZE>) -> QuickSort<T>;
+QuickSort3way(array<T, SIZE>) -> QuickSort3way<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(T a[]) -> QuickSort<T>;
+QuickSort3way(T a[]) -> QuickSort3way<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(span<T>, bool reverse) -> QuickSort<T>;
+QuickSort3way(span<T>, bool reverse) -> QuickSort3way<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(vector<T>, bool reverse) -> QuickSort<T>;
+QuickSort3way(vector<T>, bool reverse) -> QuickSort3way<T>;
 
 template<typename T, size_t SIZE> requires Comparable<T>
-QuickSort(array<T, SIZE>, bool reverse) -> QuickSort<T>;
+QuickSort3way(array<T, SIZE>, bool reverse) -> QuickSort3way<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(T a[], bool reverse) -> QuickSort<T>;
+QuickSort3way(T a[], bool reverse) -> QuickSort3way<T>;
 
-#endif //ALGORITHMS_QUICKSORT_HPP
+#endif //ALGORITHMS_QUICKSORT3WAY_HPP

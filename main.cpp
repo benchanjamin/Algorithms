@@ -584,7 +584,7 @@ int main() {
         }
         testFile.close();
         t0 = high_resolution_clock::now();
-        MergeSortBU{stringVector12, true};
+        QuickSort{stringVector12, true};
     }
     t1 = high_resolution_clock::now();
     for (const auto &x: stringVector12) {
@@ -605,7 +605,7 @@ int main() {
         }
         testFile.close();
         t0 = high_resolution_clock::now();
-        MergeSortBU{intVector12, true};
+        QuickSort{intVector12, true};
     }
     t1 = high_resolution_clock::now();
     for (const auto &x: intVector12) {

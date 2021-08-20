@@ -52,8 +52,8 @@ requires Comparable<T>
 void QuickSort<T>::sort(span<T> a, int lo, int hi, bool reverse) {
     if (hi <= lo) return;
     int j = partition(a, lo, hi, reverse);
-    sort(a, lo, j - 1);
-    sort(a, j + 1, hi);
+    sort(a, lo, j - 1, reverse);
+    sort(a, j + 1, hi, reverse);
     assert(isSorted(a, lo, hi, reverse));
 }
 

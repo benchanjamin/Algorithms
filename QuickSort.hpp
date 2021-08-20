@@ -3,7 +3,8 @@
 
 #include <span>                 // std::span, std::array, std::vector
 #include "Comparable.hpp"       // includes Comparable concept used as a constraint
-#include <algorithm>            // std::min
+#include <algorithm>            // std::shuffle
+#include <random>               // std::random_device
 
 using namespace std;
 
@@ -24,18 +25,28 @@ using namespace std;
 
 template<typename T> requires Comparable<T>
 class QuickSort {
+public:
+    explicit QuickSort<T>(span<T> a, bool reverse = false) {
+        random_device rd;
+        mt19937 g(rd());
+        shuffle(a.begin(), a.end(), g);
+        span<T> copy = a;
+        T first = copy[0];
+        T second = copy[1];
 
-
+    };
 private:
     int partition(span<T> a, int lo, int hi, bool reverse = false);
+
+    void exch(span<T> a, int i, int j);
 };
 
 template<typename T>
+requires Comparable<T>
 int QuickSort<T>::partition(span<T> a, int lo, int hi, bool reverse) {
     int i = lo;
     int j = hi + 1;
-    Comparable
-    v = a[lo];
+    T v = a[lo];
     while (true) {
 
         // find item on lo to swap
@@ -61,6 +72,14 @@ int QuickSort<T>::partition(span<T> a, int lo, int hi, bool reverse) {
     return j;
 }
 
+template<typename T>
+requires Comparable<T>
+void QuickSort<T>::exch(span<T> a, int i, int j) {
+    T swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+}
+
 /**
  * Deduct the type, <T>, of the MergeSort class based on constructor argument types
  * and number of arguments
@@ -78,25 +97,15 @@ template<typename T> requires Comparable<T>
 QuickSort(T a[]) -> QuickSort<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(span<T>, bool reverse) -> MergeSortBU<T>;
+QuickSort(span<T>, bool reverse) -> QuickSort<T>;
 
 template<typename T> requires Comparable<T>
-MergeSortBU(vector<T>,
-bool reverse
-) ->
-MergeSortBU<T>;
+QuickSort(vector<T>, bool reverse) -> QuickSort<T>;
 
 template<typename T, size_t SIZE> requires Comparable<T>
-MergeSortBU(array<T, SIZE>,
-bool reverse
-) ->
-MergeSortBU<T>;
+QuickSort(array<T, SIZE>, bool reverse) -> QuickSort<T>;
 
 template<typename T> requires Comparable<T>
-MergeSortBU(T
-a[],
-bool reverse
-) ->
-MergeSortBU<T>;
+QuickSort(T a[], bool reverse) -> QuickSort<T>;
 
 #endif //ALGORITHMS_QUICKSORT_HPP

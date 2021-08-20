@@ -9,6 +9,7 @@
 #include "ShellSort.hpp"
 #include "MergeSort.hpp"
 #include "MergeSortBU.hpp"
+#include "QuickSort.hpp"
 
 
 using namespace std;
@@ -530,6 +531,23 @@ int main() {
 
     cout << "Finished Merge Sort Bottom-Up: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
-
+    // Tests the quick sort bottom-up algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector11;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector11.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        QuickSort{stringVector11};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector11) {
+        cout << x << " ";
+    }
+    cout << endl;
 }
 

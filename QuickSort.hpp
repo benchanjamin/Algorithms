@@ -54,7 +54,7 @@ void QuickSort<T>::sort(span<T> a, int lo, int hi, bool reverse) {
     int j = partition(a, lo, hi, reverse);
     sort(a, lo, j - 1);
     sort(a, j + 1, hi);
-    assert(isSorted(a, lo, hi));
+    assert(isSorted(a, lo, hi, reverse));
 }
 
 template<typename T>

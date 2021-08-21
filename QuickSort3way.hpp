@@ -62,11 +62,11 @@ private:
 template<typename T>
 requires Comparable<T>
 void QuickSort3way<T>::sort(span<T> a, int lo, int hi, bool reverse) {
+    if (hi <= lo) return;
+    int lt = lo, gt = hi;
+    T v = a[lo];
+    int i = lo + 1;
     if (!reverse) {
-        if (hi <= lo) return;
-        int lt = lo, gt = hi;
-        T v = a[lo];
-        int i = lo + 1;
         while (i <= gt) {
             int cmp = compareTo(a[i], v);
             if (cmp < 0) exch(a, lt++, i++);
@@ -74,10 +74,6 @@ void QuickSort3way<T>::sort(span<T> a, int lo, int hi, bool reverse) {
             else i++;
         }
     } else {
-        if (hi <= lo) return;
-        int lt = lo, gt = hi;
-        T v = a[lo];
-        int i = lo + 1;
         while (i <= gt) {
             int cmp = compareTo(a[i], v);
             if (cmp > 0) exch(a, lt++, i++);

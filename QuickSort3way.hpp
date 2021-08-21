@@ -37,8 +37,10 @@ public:
         assert(isSorted(a, reverse));
     };
 private:
+    // quick sort indicies between lo and hi
     void sort(span<T> a, int lo, int hi, bool reverse = false);
 
+    // exchange between two indices in a container
     void exch(span<T> a, int i, int j);
 
     // check if entire container is sorted -- useful for debugging
@@ -46,6 +48,17 @@ private:
 
     // check if container is sorted between two indices, lo and hi -- useful for debugging
     bool isSorted(span<T> a, bool reverse = false);
+
+    /**
+     * Compares the first and second parameters
+     *
+     * @param first
+     * @param second
+     * @return -1 if first less than second, 0 if equal, and 1 if first is greater than second
+     */
+    template<typename T>
+    requires Comparable<T>
+    static int compareTo(T first, T second);
 };
 
 template<typename T>
@@ -57,7 +70,7 @@ void QuickSort3way<T>::sort(span<T> a, int lo, int hi, bool reverse) {
         T v = a[lo];
         int i = lo + 1;
         while (i <= gt) {
-            int cmp = a[i].compareTo(v);
+            int cmp = compareTo(a[i], v);
             if (cmp < 0) exch(a, lt++, i++);
             else if (cmp > 0) exch(a, i, gt--);
             else i++;
@@ -68,7 +81,7 @@ void QuickSort3way<T>::sort(span<T> a, int lo, int hi, bool reverse) {
         T v = a[lo];
         int i = lo + 1;
         while (i <= gt) {
-            int cmp = a[i].compareTo(v);
+            int cmp = compareTo(a[i], v);
             if (cmp > 0) exch(a, lt++, i++);
             else if (cmp < 0) exch(a, i, gt--);
             else i++;
@@ -107,6 +120,14 @@ bool QuickSort3way<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
             if (a[i] > a[i - 1]) return false;
         return true;
     }
+}
+
+template<typename T>
+requires Comparable<T>
+int QuickSort3way<T>::compareTo(T first, T second) {
+    if (first < second) return -1;
+    else if (first == second) return 0;
+    else return 1;
 }
 
 /**

@@ -11,6 +11,7 @@
 #include "MergeSortBU.hpp"
 #include "QuickSort.hpp"
 #include "QuickSort3way.hpp"
+#include "BinarySearch.hpp"
 
 
 using namespace std;
@@ -700,5 +701,7 @@ int main() {
 
     cout << "Finished Quick 3-way Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
+    // Tests binary search algorithm
+    int result = BinarySearch::indexOf(intVector14, 8);
 }
 

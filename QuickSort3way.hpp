@@ -56,8 +56,6 @@ private:
      * @param second
      * @return -1 if first less than second, 0 if equal, and 1 if first is greater than second
      */
-    template<typename T>
-    requires Comparable<T>
     static int compareTo(T first, T second);
 };
 

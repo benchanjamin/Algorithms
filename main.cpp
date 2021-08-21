@@ -10,6 +10,7 @@
 #include "MergeSort.hpp"
 #include "MergeSortBU.hpp"
 #include "QuickSort.hpp"
+#include "QuickSort3way.hpp"
 
 
 using namespace std;
@@ -614,6 +615,90 @@ int main() {
     cout << endl;
 
     cout << "Finished Quick Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick 3-way sort algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector13;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector13.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        QuickSort3way{stringVector13};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector13) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick 3-way Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick 3-way sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector13;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector13.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        QuickSort3way{intVector13};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector13) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick 3-way Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick 3-way reverse sort algorithm on strings
+    testFile.clear();
+    testFile.open("./Test Files/random_strings.txt");
+    vector<string> stringVector14;
+    if (testFile.is_open()) {
+        string str;
+        while (testFile >> str) {
+            stringVector14.emplace_back(str);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        QuickSort3way{stringVector14, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: stringVector14) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick 3-way Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
+
+    // Tests the quick 3-way reverse sort algorithm on ints
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    vector<int> intVector14;
+    if (testFile.is_open()) {
+        int number;
+        while (testFile >> number) {
+            intVector14.emplace_back(number);
+        }
+        testFile.close();
+        t0 = high_resolution_clock::now();
+        QuickSort3way{intVector14, true};
+    }
+    t1 = high_resolution_clock::now();
+    for (const auto &x: intVector14) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    cout << "Finished Quick 3-way Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
 }
 

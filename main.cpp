@@ -702,6 +702,6 @@ int main() {
     cout << "Finished Quick 3-way Reverse Sort: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n" << endl;
 
     // Tests binary search algorithm
-    int result = BinarySearch::indexOf(intVector14, 8);
+    int result = BinarySearch::indexOf(intVector14, 8, true);
 }
 

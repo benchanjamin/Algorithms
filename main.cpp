@@ -1,5 +1,6 @@
 #include <chrono>
 #include <fstream>
+#include <cassert>
 #include "Bag.hpp"
 #include "Queue.hpp"
 #include "Stack.hpp"
@@ -703,5 +704,7 @@ int main() {
 
     // Tests binary search algorithm
     int result = BinarySearch::indexOf(intVector14, 8, true);
+    // finding 8 should return the index of 2
+    assert(result == 2);
 }
 

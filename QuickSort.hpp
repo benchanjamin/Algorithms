@@ -37,17 +37,8 @@ public:
         assert(isSorted(a, reverse));
     };
 
-    explicit QuickSort<T>(T a[], int length, bool reverse = false) {
-        random_device rd;
-        mt19937 g(rd());
-        shuffle(a, a + length, g);
-        sort(a, 0, length - 1, reverse);
-        assert(isSorted(a, reverse));
-    };
 private:
     void sort(span<T> a, int lo, int hi, bool reverse = false);
-
-    void sort(T a[], int length, int lo, int hi, bool reverse = false);
 
     int partition(span<T> a, int lo, int hi, bool reverse = false);
 
@@ -147,16 +138,6 @@ bool QuickSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
             if (a[i] > a[i - 1]) return false;
         return true;
     }
-}
-
-template<typename T>
-requires Comparable<T>
-void QuickSort<T>::sort(T a[], int length, int lo, int hi, bool reverse) {
-    if (hi <= lo) return;
-    int j = partition(a, lo, hi, reverse);
-    sort(a, lo, j - 1, reverse);
-    sort(a, j + 1, hi, reverse);
-    assert(isSorted(a, lo, hi, reverse));
 }
 
 /**

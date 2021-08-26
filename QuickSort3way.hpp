@@ -36,6 +36,7 @@ public:
         sort(a, 0, a.size() - 1, reverse);
         assert(isSorted(a, reverse));
     };
+
 private:
     // quick sort indicies between lo and hi
     void sort(span<T> a, int lo, int hi, bool reverse = false);

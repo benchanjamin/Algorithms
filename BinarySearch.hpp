@@ -43,7 +43,7 @@ public:
 
     template<typename T>
     requires Comparable<T>
-    static int indexOf(T a[], int length, int key, bool reverse = false);
+    static int indexOf(T a[], int arrayLength, int key, bool reverse = false);
 
 private:
     template<typename T>
@@ -245,8 +245,8 @@ bool BinarySearch::isSorted(array<T, SIZE> a, int lo, int hi, bool reverse) {
 
 template<typename T>
 requires Comparable<T>
-bool BinarySearch::isSorted(T a[], int length, bool reverse) {
-    return isSorted(a, 0, length, reverse);
+bool BinarySearch::isSorted(T a[], int arrayLength, bool reverse) {
+    return isSorted(a, 0, arrayLength, reverse);
 }
 
 template<typename T>

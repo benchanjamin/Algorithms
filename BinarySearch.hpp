@@ -28,18 +28,47 @@ public:
     // this class should not be instantiated
     BinarySearch() = default;
 
+/**
+ * Returns the index of the specified key in the specified array.
+ *
+ * @param  a the array of integers, must be sorted in ascending order
+ * @param  key the search key
+ * @return index of key in array {@code a} if present; {@code -1} otherwise
+ */
     template<typename T>
     requires Comparable<T>
     static int indexOf(span<T> a, int key, bool reverse = false);
 
+/**
+ * Returns the index of the specified key in the specified array.
+ *
+ * @param  a the array of integers, must be sorted in ascending order
+ * @param  key the search key
+ * @return index of key in array {@code a} if present; {@code -1} otherwise
+ */
     template<typename T>
     requires Comparable<T>
     static int indexOf(vector<T> a, int key, bool reverse = false);
 
+/**
+ * Returns the index of the specified key in the specified array.
+ *
+ * @param  a the array of integers, must be sorted in ascending order
+ * @param  key the search key
+ * @return index of key in array {@code a} if present; {@code -1} otherwise
+ */
     template<typename T, size_t SIZE>
     requires Comparable<T>
     static int indexOf(array<T, SIZE> a, int key, bool reverse = false);
 
+/**
+ * Returns the index of the specified key in the specified array.
+ *
+ * @param  a the array of integers, must be sorted in ascending order
+ * @param  key the search key
+ * @param  key the search key
+ * @return index of key in array {@code a} if present; {@code -1} otherwise
+ */
     template<typename T>
     requires Comparable<T>
     static int indexOf(T a[], int arrayLength, int key, bool reverse = false);

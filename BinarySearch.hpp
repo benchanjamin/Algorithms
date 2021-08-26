@@ -5,7 +5,8 @@
 #include <array>                // std::array
 #include <vector>               // std::vector
 #include "Comparable.hpp"       // includes Comparable concept used as a constraint
-#include <cassert>               // std::assert
+#include <cassert>              // std::assert
+#include <iostream>             // std::sizeof
 
 /**
  *  The {@code BinarySearch} class provides a static method for binary
@@ -40,6 +41,10 @@ public:
     requires Comparable<T>
     static int indexOf(array<T, SIZE> a, int key, bool reverse = false);
 
+    template<typename T>
+    requires Comparable<T>
+    static int indexOf(T a[], int key, bool reverse = false);
+
 private:
     template<typename T>
     requires Comparable<T>
@@ -64,6 +69,14 @@ private:
     template<typename T, size_t SIZE>
     requires Comparable<T>
     static bool isSorted(array<T, SIZE> a, int lo, int hi, bool reverse = false);
+
+    template<typename T>
+    requires Comparable<T>
+    static bool isSorted(T a[], bool reverse = false);
+
+    template<typename T>
+    requires Comparable<T>
+    static bool isSorted(T a[], int lo, int hi, bool reverse = false);
 };
 
 template<typename T>
@@ -146,6 +159,32 @@ int BinarySearch::indexOf(array<T, SIZE> a, int key, bool reverse) {
 
 template<typename T>
 requires Comparable<T>
+static int indexOf(T a[], int key, bool reverse = false) {
+    assert(isSorted(a, reverse));
+    int lo = 0;
+    int hi = sizeof(a) / sizeof(a[1]) - 1;
+    if (!reverse) {
+        while (lo <= hi) {
+            // Key is in a[lo..hi] or not present.
+            int mid = lo + (hi - lo) / 2;
+            if (key < a[mid]) hi = mid - 1;
+            else if (key > a[mid]) lo = mid + 1;
+            else return mid;
+        }
+    } else {
+        while (lo <= hi) {
+            // Key is in a[lo..hi] or not present.
+            int mid = lo + (hi - lo) / 2;
+            if (key > a[mid]) hi = mid - 1;
+            else if (key < a[mid]) lo = mid + 1;
+            else return mid;
+        }
+    }
+    return -1;
+};
+
+template<typename T>
+requires Comparable<T>
 bool BinarySearch::isSorted(span<T> a, bool reverse) {
     return isSorted(a, 0, a.size() - 1, reverse);
 }
@@ -193,6 +232,27 @@ bool BinarySearch::isSorted(array<T, SIZE> a, bool reverse) {
 template<typename T, size_t SIZE>
 requires Comparable<T>
 bool BinarySearch::isSorted(array<T, SIZE> a, int lo, int hi, bool reverse) {
+    if (!reverse) {
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] < a[i - 1]) return false;
+        return true;
+    } else {
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] > a[i - 1]) return false;
+        return true;
+    }
+}
+
+template<typename T>
+requires Comparable<T>
+bool BinarySearch::isSorted(T a[], bool reverse) {
+    int length = sizeof(a) / sizeof(a[0]);
+    return isSorted(a, 0, length, reverse);
+}
+
+template<typename T>
+requires Comparable<T>
+bool BinarySearch::isSorted(T a[], int lo, int hi, bool reverse) {
     if (!reverse) {
         for (int i = lo + 1; i <= hi; i++)
             if (a[i] < a[i - 1]) return false;

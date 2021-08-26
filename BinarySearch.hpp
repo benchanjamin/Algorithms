@@ -22,7 +22,6 @@
  *  The Java program from which this C++ code was adapted from is found at
  *  https://algs4.cs.princeton.edu/11model/BinarySearch.java.html.
  *
- *  @param <T> the generic type of an item in this searching algorithm
  */
 class BinarySearch {
 public:

@@ -25,7 +25,7 @@ public:
      * @return the key of rank {@code k}
      * @throws IllegalArgumentException unless {@code 0 <= k < a.length}
      */
-    int rankOf(int rank);
+    int rankOf(int rank, bool reverse = false);
 
 private:
     span<T> container;
@@ -45,7 +45,7 @@ private:
 
 template<typename T>
 requires Comparable<T>
-int QuickSelect<T>::rankOf(int rank) {
+int QuickSelect<T>::rankOf(int rank, bool reverse) {
     int containerLength = this->container.size();
     if (rank < 0 || rank >= containerLength) {
         throw invalid_argument("index is not between 0 and " + to_string(containerLength) + ": " +
@@ -56,7 +56,7 @@ int QuickSelect<T>::rankOf(int rank) {
     shuffle(container.begin(), container.end(), g);
     int lo = 0, hi = containerLength - 1;
     while (hi > lo) {
-        int i = partition(container, lo, hi);
+        int i = partition(container, lo, hi, reverse);
         if (i > rank) hi = i - 1;
         else if (i < rank) lo = i + 1;
         else return container[i];

@@ -719,19 +719,25 @@ int main() {
     // finding 3 should return the index of 2
     assert(result3 == 2);
 
+    // Tests binary search algorithm for basic int array of length 5 that is in reverse order
+    SelectionSort{testVector, true};
+    int result4 = BinarySearch::indexOf(testVector, 5, 3, false);
+    // finding 3 should return the index of 2
+    assert(result4 == 2);
+
     // Tests quick select algorithm to determine the element in the basic array of rank 5
     // (aka the 6th highest element in the container)
     int testVector2[15] = {50, 21, 28, 65, 39, 59, 56, 22, 95, 12, 90, 53, 32, 77, 33};
     QuickSelect quickselect = QuickSelect(testVector2);
-    int result4 = quickselect.rankOf(5);
+    int result5 = quickselect.rankOf(5);
     // finding a rank of 5 should return 33 of testVector
-    assert(result4 == 33);
+    assert(result5 == 33);
 
     // Tests quick select algorithm to determine the element in the basic array of rank 5 if it
     // were sorted in reverse order (aka the 6th lowest element in the container)
     QuickSelect quickselect2 = QuickSelect(testVector2);
-    int result5 = quickselect2.rankOf(5);
+    int result6 = quickselect2.rankOf(5);
     // finding a rank of 5 should return 33 of testVector
-    assert(result5 == 33);
+    assert(result6 == 33);
 }
 

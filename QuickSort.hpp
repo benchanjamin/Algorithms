@@ -141,7 +141,7 @@ bool QuickSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
 }
 
 /**
- * Deduct the type, <T>, of the MergeSort class based on constructor argument types
+ * Deduct the type, <T>, of the QuickSort class based on constructor argument types
  * and number of arguments
  */
 template<typename T> requires Comparable<T>

@@ -705,11 +705,17 @@ int main() {
     // Tests binary search algorithm for int vector
     int result1 = BinarySearch::indexOf(intVector13, 5, false);
     // finding 5 should return the index of 4
-    assert(result1 == 5);
+    assert(result1 == 4);
 
     // Tests binary search algorithm for reverse int vector
     int result2 = BinarySearch::indexOf(intVector14, 8, true);
     // finding 8 should return the index of 2
     assert(result2 == 2);
+
+    // Tests binary search algorithm for basic int array of length 5
+    int testVector[5] = {1, 2, 3, 4, 5};
+    int result3 = BinarySearch::indexOf(testVector, 5, 3, false);
+    // finding 3 should return the index of 2
+    assert(result3 == 2);
 }
 

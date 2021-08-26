@@ -36,8 +36,18 @@ public:
         sort(a, 0, a.size() - 1, reverse);
         assert(isSorted(a, reverse));
     };
+
+    explicit QuickSort<T>(T a[], int length, bool reverse = false) {
+        random_device rd;
+        mt19937 g(rd());
+        shuffle(a, a + length, g);
+        sort(a, 0, length - 1, reverse);
+        assert(isSorted(a, reverse));
+    };
 private:
     void sort(span<T> a, int lo, int hi, bool reverse = false);
+
+    void sort(T a[], int length, int lo, int hi, bool reverse = false);
 
     int partition(span<T> a, int lo, int hi, bool reverse = false);
 
@@ -139,6 +149,16 @@ bool QuickSort<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
     }
 }
 
+template<typename T>
+requires Comparable<T>
+void QuickSort<T>::sort(T a[], int length, int lo, int hi, bool reverse) {
+    if (hi <= lo) return;
+    int j = partition(a, lo, hi, reverse);
+    sort(a, lo, j - 1, reverse);
+    sort(a, j + 1, hi, reverse);
+    assert(isSorted(a, lo, hi, reverse));
+}
+
 /**
  * Deduct the type, <T>, of the MergeSort class based on constructor argument types
  * and number of arguments
@@ -165,6 +185,6 @@ template<typename T, size_t SIZE> requires Comparable<T>
 QuickSort(array<T, SIZE>, bool reverse) -> QuickSort<T>;
 
 template<typename T> requires Comparable<T>
-QuickSort(T a[], bool reverse) -> QuickSort<T>;
+QuickSort(T a[], int length, bool reverse) -> QuickSort<T>;
 
 #endif //ALGORITHMS_QUICKSORT_HPP

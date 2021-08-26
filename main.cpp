@@ -13,6 +13,7 @@
 #include "QuickSort.hpp"
 #include "QuickSort3way.hpp"
 #include "BinarySearch.hpp"
+#include "QuickSelect.hpp"
 
 
 using namespace std;
@@ -714,8 +715,12 @@ int main() {
 
     // Tests binary search algorithm for basic int array of length 5
     int testVector[5] = {1, 2, 3, 4, 5};
-    int result3 = BinarySearch::indexOf(testVector, 5, 3, false);
+    int result3 = BinarySearch::indexOf(testVector, 3, false);
     // finding 3 should return the index of 2
     assert(result3 == 2);
+
+    // Tests quickselect algorithm to determine the element in the array of rank 5
+    QuickSelect Q = QuickSelect(testVector);
+
 }
 

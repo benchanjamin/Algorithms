@@ -25,21 +25,35 @@ public:
      * @return the key of rank {@code k}
      * @throws IllegalArgumentException unless {@code 0 <= k < a.length}
      */
-    int indexOf(int rank);
+    int rankOf(int rank);
 
 private:
     span<T> container;
+
+    void sort(span<T> a, int lo, int hi, bool reverse = false);
+
+    int partition(span<T> a, int lo, int hi, bool reverse = false);
+
+    void exch(span<T> a, int i, int j);
+
+    // check if entire container is sorted -- useful for debugging
+    bool isSorted(span<T> a, int lo, int hi, bool reverse = false);
+
+    // check if container is sorted between two indices, lo and hi -- useful for debugging
+    bool isSorted(span<T> a, bool reverse = false);
 };
 
 template<typename T>
 requires Comparable<T>
-int QuickSelect<T>::indexOf(int rank) {
+int QuickSelect<T>::rankOf(int rank) {
     int containerLength = this->container.size();
     if (rank < 0 || rank >= containerLength) {
         throw invalid_argument("index is not between 0 and " + to_string(containerLength) + ": " +
                                to_string(rank));
     }
-    shuffle(container.begin(), container.end());
+    random_device rd;
+    mt19937 g(rd());
+    shuffle(container.begin(), container.end(), g);
     int lo = 0, hi = containerLength - 1;
     while (hi > lo) {
         int i = partition(container, lo, hi);
@@ -48,6 +62,95 @@ int QuickSelect<T>::indexOf(int rank) {
         else return container[i];
     }
     return container[lo];
+}
+
+template<typename T>
+requires Comparable<T>
+void QuickSelect<T>::sort(span<T> a, int lo, int hi, bool reverse) {
+    if (hi <= lo) return;
+    int j = partition(a, lo, hi, reverse);
+    sort(a, lo, j - 1, reverse);
+    sort(a, j + 1, hi, reverse);
+    assert(isSorted(a, lo, hi, reverse));
+}
+
+template<typename T>
+requires Comparable<T>
+int QuickSelect<T>::partition(span<T> a, int lo, int hi, bool reverse) {
+    int i = lo;
+    int j = hi + 1;
+    T v = a[lo];
+    if (!reverse) {
+        while (true) {
+
+            // find item on lo to swap
+            while (a[++i] < v) {
+                if (i == hi) break;
+            }
+
+            // find item on hi to swap
+            while (v < a[--j]) {
+                if (j == lo) break;      // redundant since a[lo] acts as sentinel
+            }
+
+            // check if pointers cross
+            if (i >= j) break;
+
+            exch(a, i, j);
+        }
+    } else {
+        while (true) {
+            // find item on lo to swap
+            while (a[++i] > v) {
+                if (i == hi) break;
+            }
+
+            // find item on hi to swap
+            while (v > a[--j]) {
+                if (j == lo) break;      // redundant since a[lo] acts as sentinel
+            }
+
+            // check if pointers cross
+            if (i >= j) break;
+
+            exch(a, i, j);
+        }
+    }
+
+    // put partitioning item v at a[j]
+    exch(a, lo, j);
+
+    // now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
+    return j;
+}
+
+template<typename T>
+requires Comparable<T>
+void QuickSelect<T>::exch(span<T> a, int i, int j) {
+    T swap = a[i];
+    a[i] = a[j];
+    a[j] = swap;
+}
+
+template<typename T>
+requires Comparable<T>
+bool QuickSelect<T>::isSorted(span<T> a, bool reverse) {
+    return isSorted(a, 0, a.size() - 1, reverse);
+}
+
+
+template<typename T>
+requires Comparable<T>
+bool QuickSelect<T>::isSorted(span<T> a, int lo, int hi, bool reverse) {
+    if (!reverse) {
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] < a[i - 1]) return false;
+        return true;
+    } else {
+        for (int i = lo + 1; i <= hi; i++)
+            if (a[i] > a[i - 1]) return false;
+        return true;
+    }
 }
 
 /**

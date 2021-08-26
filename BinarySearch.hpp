@@ -12,7 +12,7 @@
  *  The {@code BinarySearch} class provides a static method for binary
  *  searching for an integer in a sorted array of integers.
  *
- *  The indexOf operation takes logarithmic time in the worst case.
+ *  The rankOf operation takes logarithmic time in the worst case.
  *
  *  @author Benjamin Chan
  *

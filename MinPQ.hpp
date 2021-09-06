@@ -206,8 +206,6 @@ std::ostream &operator<<(std::ostream &os, const MinPQ<T> &minPQ) {
 }
 
 template<typename T> requires Comparable<T>
-MinPQ(vector<T>)
-->
-MinPQ<T>;
+MinPQ(vector<T>)->MinPQ<T>;
 
 #endif //ALGORITHMS_MINPQ_HPP

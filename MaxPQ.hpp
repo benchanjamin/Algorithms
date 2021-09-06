@@ -19,20 +19,21 @@ using namespace std;
  *
  *  This implementation uses a binary heap.
  *  The insert and delete-the-maximum operations take
- *  &Theta;(log <em>n</em>) amortized time, where <em>n</em> is the number
+ *  Θ(log(n)) amortized time, where n is the number
  *  of elements in the priority queue. This is an amortized bound
  *  (and not a worst-case bound) because of array resizing operations.
- *  The <em>min</em>, <em>size</em>, and <em>is-empty</em> operations take
- *  &Theta;(1) time in the worst case.
+ *  The min, size, and is-empty operations take
+ *  Θ(1) time in the worst case.
  *  Construction takes time proportional to the specified capacity or the
  *  number of items used to initialize the data structure.
- *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/24pq">Section 2.4</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ *  @author Benjamin Chan
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/24pq/MaxPQ.java.html.
  *
  *  @param <T> the generic type of key on this priority queue
  */
@@ -103,7 +104,6 @@ public:
      * @param  x the new key to add to this priority queue
      */
     void insert(T x) {
-
         // add x, and percolate it up to maintain heap invariant
         pq.push_back(x);
         swim(n);
@@ -204,6 +204,7 @@ std::ostream &operator<<(std::ostream &os, const MaxPQ<T> &maxPQ) {
     return os << maxPQ.toString();
 }
 
+/// Uses type deduction for one of the constructors
 template<typename T> requires Comparable<T>
 MaxPQ(vector<T>) -> MaxPQ<T>;
 

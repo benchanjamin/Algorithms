@@ -5,6 +5,6 @@ from their textbook, Algorithms, 4th edition. All of C++ programs are tested in 
 
 Here are where my files were originated from:
 
-[Bag.java](https://algs4.cs.princeton.edu/13stacks/Bag.java.html) -> Bag.hpp
+[Bag.java](https://algs4.cs.princeton.edu/13stacks/Bag.java.html) -> Bag.hpp \
 [BinarySearch.java](https://algs4.cs.princeton.edu/11model/BinarySearch.java.html) -> BinarySearch.hpp
 

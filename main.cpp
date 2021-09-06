@@ -14,6 +14,7 @@
 #include "QuickSort3way.hpp"
 #include "BinarySearch.hpp"
 #include "QuickSelect.hpp"
+#include "MaxPQ.hpp"
 
 
 using namespace std;
@@ -739,5 +740,7 @@ int main() {
     int result6 = quickselect2.rankOf(5);
     // finding a rank of 5 should return 33 of testVector
     assert(result6 == 33);
+
+    MaxPQ<int> pq = MaxPQ<int>();
 }
 

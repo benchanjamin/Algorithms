@@ -8,6 +8,20 @@
 #include <cassert>              // std::assert
 #include <stdexcept>            // std::invalid_argument
 
+/**
+ *  The {@code QuickSelect} class provides a public method for selecting the ith smallest element
+ *  in an array using quicksort.
+ *
+ *  @author Benjamin Chan
+ *
+ *  Adapted from Algorithms, 4th edition, {@authors Robert Sedgewick and Kevin Wayne}
+ *  and their booksite https://algs4.cs.princeton.edu/
+ *
+ *  The Java program from which this C++ code was adapted from is found at
+ *  https://algs4.cs.princeton.edu/23quicksort/Quick.java.html.
+ *
+ *  @param <T> the generic type of an item in this sorting algorithm
+ */
 
 template<typename T> requires Comparable<T>
 class QuickSelect {
@@ -17,7 +31,7 @@ public:
     }
 
     /**
-     * Rearranges the array so that {@code a[k]} contains the kth smallest key;
+     * Rearranges the container so that {@code a[k]} contains the kth smallest key;
      * {@code a[0]} through {@code a[k-1]} are less than (or equal to) {@code a[k]}; and
      * {@code a[k+1]} through {@code a[n-1]} are greater than (or equal to) {@code a[k]}.
      *

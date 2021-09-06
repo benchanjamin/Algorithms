@@ -13,7 +13,7 @@ using namespace std;
 
 /**
  *  The {@code QuickSort} class provides a public method for sorting a
- *  container and selecting the ith smallest element in an array using quicksort.
+ *  container.
  *
  *  @author Benjamin Chan
  *

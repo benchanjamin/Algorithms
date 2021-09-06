@@ -50,21 +50,10 @@ template<typename T> requires Comparable<T>
 class MaxPQ {
 public:
     /**
-     * Initializes an empty priority queue with the given initial capacity.
-     *
-     * @param  initCapacity the initial capacity of this priority queue
-     */
-    explicit MaxPQ(int initCapacity) {
-        vector<T> pqMove{initCapacity};
-        this->pq = pqMove;
-        this->n = 0;
-    }
-
-    /**
      * Initializes an empty priority queue.
      */
     MaxPQ() {
-        MaxPQ(1);
+        this->n = 0;
     }
 
     /**
@@ -125,11 +114,8 @@ public:
      */
     void insert(T x) {
 
-        // double size of array if necessary
-        if (n == pq.size() - 1) resize(2 * pq.size());
-
         // add x, and percolate it up to maintain heap invariant
-        pq[++n] = x;
+        pq.push_back(x);
         swim(n);
     }
 
@@ -208,6 +194,7 @@ std::string MaxPQ<T>::toString() const {
     while (!copy.isEmpty()) {
         ss << boost::lexical_cast<std::string>(copy.delMax()) << " ";
     }
+    ss << endl;
     return ss.str();
 }
 

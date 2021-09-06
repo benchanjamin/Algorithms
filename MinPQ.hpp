@@ -33,8 +33,6 @@
  *
  *  @param <Key> the generic type of key on this priority queue
  */
-#ifndef ALGORITHMS_MAXPQ_HPP
-#define ALGORITHMS_MAXPQ_HPP
 
 #include <span>                     // std::span
 #include <array>                    // std::array
@@ -82,14 +80,14 @@ using namespace std;
  *  @param <T> the generic type of key on this priority queue
  */
 template<typename T> requires Comparable<T>
-class MaxPQ {
+class MinPQ {
 public:
     /**
      * Initializes an empty priority queue with the given initial capacity.
      *
      * @param  initCapacity the initial capacity of this priority queue
      */
-    explicit MaxPQ(int initCapacity) {
+    explicit MinPQ(int initCapacity) {
         vector<T> pqMove{initCapacity};
         this->pq = pqMove;
         this->n = 0;
@@ -98,8 +96,8 @@ public:
     /**
      * Initializes an empty priority queue.
      */
-    MaxPQ() {
-        MaxPQ(1);
+    MinPQ() {
+        MinPQ(1);
     }
 
     /**
@@ -108,7 +106,7 @@ public:
      *
      * @param  keys the array of keys
      */
-    explicit MaxPQ(vector<T> keys) {
+    explicit MinPQ(vector<T> keys) {
         n = keys.size();
         pq = vector<T>(n + 1);
         for (int i = 0; i < n; i++)

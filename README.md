@@ -22,4 +22,4 @@ and WeightedQuickUnionUF.hpp \
 [Quick.java](https://algs4.cs.princeton.edu/23quicksort/Quick.java.html) -> QuickSort.hpp and QuickSelect.hpp \
 [Quick3way.java](https://algs4.cs.princeton.edu/23quicksort/Quick3way.java.html) -> QuickSort3way.hpp
 [MinPQ.java](https://algs4.cs.princeton.edu/24pq/MinPQ.java.html) -> MinPQ.hpp \
-[MaxPQ.java](https://algs4.cs.princeton.edu/24pq/MaxPQ.java.html) -> MaxPQ.hpp \
+[MaxPQ.java](https://algs4.cs.princeton.edu/24pq/MaxPQ.java.html) -> MaxPQ.hpp

@@ -15,6 +15,7 @@
 #include "BinarySearch.hpp"
 #include "QuickSelect.hpp"
 #include "MaxPQ.hpp"
+#include "MinPQ.hpp"
 
 
 using namespace std;
@@ -742,7 +743,7 @@ int main() {
     assert(result6 == 33);
 
     // Tests the max priority queue data structure on ints
-    MaxPQ<int> maxPQ = MaxPQ<int>();
+    MaxPQ<int> maxPQ;
     testFile.clear();
     testFile.open("./Test Files/random_numbers.txt");
     if (testFile.is_open()) {
@@ -757,6 +758,25 @@ int main() {
     cout << maxPQ;
 
     cout << "Finished Testing Max Priority Queue: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n"
+         << endl;
+
+
+    // Tests the min priority queue data structure on ints
+    MinPQ<int> minPQ;
+    testFile.clear();
+    testFile.open("./Test Files/random_numbers.txt");
+    if (testFile.is_open()) {
+        int number;
+        t0 = high_resolution_clock::now();
+        while (testFile >> number) {
+            minPQ.insert(number);
+        }
+    }
+    t1 = high_resolution_clock::now();
+    testFile.close();
+    cout << minPQ;
+
+    cout << "Finished Testing Min Priority Queue: " << duration_cast<milliseconds>(t1 - t0).count() << " msecs\n"
          << endl;
 
 }

@@ -8,16 +8,6 @@
 #include <cassert>                  // std::assert
 #include <boost/lexical_cast.hpp>   // boost::lexical_cast
 
-/**
- * @def the NoSuchElementException if there are no items in the priority queue after
- * using the max(), methods
- */
-struct NoSuchElementException : public std::exception {
-    const char *what() {
-        return "Priority Queue Underflow";
-    }
-};
-
 using namespace std;
 
 /**
@@ -183,6 +173,16 @@ private:
         pq[i] = pq[j];
         pq[j] = swap;
     }
+
+    /**
+     * @def the NoSuchElementException if there are no items in the priority queue after
+     * using the max(), methods
+     */
+    struct NoSuchElementException : public std::exception {
+        const char *what() {
+            return "Priority Queue Underflow";
+        }
+    };
 
 };
 

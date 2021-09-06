@@ -1,5 +1,7 @@
 # echo "settings set target.load-cwd-lldbinit true" in ~/.lldbinit first so that it can use these settings
 # from the "Algorithms" project directory
 
+# These setting are used so that the LLDB Debugger can responsively step into functions
+
 settings set target.process.thread.step-in-avoid-nodebug 0
 settings set target.process.thread.step-avoid-regexp ""

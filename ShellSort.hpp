@@ -24,7 +24,7 @@ using namespace std;
  *  and their booksite https://algs4.cs.princeton.edu/
  *
  *  The Java program from which this C++ code was adapted from is found at
- *  https://algs4.cs.princeton.edu/25applications/Insertion.java.html.
+ *  https://algs4.cs.princeton.edu/21elementary/Shell.java.html.
  *
  *  @param <T> the generic type of an item in this sorting algorithm
  */

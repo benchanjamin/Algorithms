@@ -12,13 +12,13 @@ using namespace std;
 
 /**
  *  The {@code MaxPQ} class represents a priority queue of generic keys.
- *  It supports the usual <em>insert</em> and <em>delete-the-maximum</em>
+ *  It supports the usual insert and delete-the-maximum
  *  operations, along with methods for peeking at the maximum key,
  *  testing if the priority queue is empty, and iterating through
  *  the keys.
- *  <p>
- *  This implementation uses a <em>binary heap</em>.
- *  The <em>insert</em> and <em>delete-the-maximum</em> operations take
+ *
+ *  This implementation uses a binary heap.
+ *  The insert and delete-the-maximum operations take
  *  &Theta;(log <em>n</em>) amortized time, where <em>n</em> is the number
  *  of elements in the priority queue. This is an amortized bound
  *  (and not a worst-case bound) because of array resizing operations.
@@ -47,10 +47,10 @@ public:
     }
 
     /**
-     * Initializes a priority queue from the array of keys.
+     * Initializes a priority queue from the vector of keys.
      * Takes time proportional to the number of keys, using sink-based heap construction.
      *
-     * @param  keys the array of keys
+     * @param keys, the vector of keys
      */
     explicit MaxPQ(vector<T> keys) {
         n = keys.size();
@@ -110,11 +110,11 @@ public:
     }
 
     /**
- * Removes and returns a largest key on this priority queue.
- *
- * @return a largest key on this priority queue
- * @throws NoSuchElementException if this priority queue is empty
- */
+     * Removes and returns a largest key on this priority queue.
+     *
+     * @return a largest key on this priority queue
+     * @throws NoSuchElementException if this priority queue is empty
+     */
     T delMax() {
         try {
             if (isEmpty()) throw NoSuchElementException();
@@ -132,15 +132,25 @@ public:
     }
 
     /**
-  * Returns a string representation of this bag.
-  *
-  * @return the sequence of items in random order, separated by spaces
-  */
+      * Returns a string representation of this priority queue.
+      *
+      * @return the sequence of items in descending order, separated by spaces
+      */
     [[nodiscard]] std::string toString() const;
 
 private:
     vector<T> pq;               // store items at indices 1 to n
     int n{};                    // number of items on priority queue
+
+    /**
+     * @def the NoSuchElementException if there are no items in the priority queue after
+     * using the max(), methods
+     */
+    struct NoSuchElementException : public std::exception {
+        const char *what() {
+            return "Priority Queue Underflow";
+        }
+    };
 
     /***************************************************************************
      * Helper functions to restore the heap invariant.
@@ -173,16 +183,6 @@ private:
         pq[i] = pq[j];
         pq[j] = swap;
     }
-
-    /**
-     * @def the NoSuchElementException if there are no items in the priority queue after
-     * using the max(), methods
-     */
-    struct NoSuchElementException : public std::exception {
-        const char *what() {
-            return "Priority Queue Underflow";
-        }
-    };
 
 };
 

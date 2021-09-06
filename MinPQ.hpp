@@ -111,11 +111,11 @@ public:
     }
 
     /**
- * Removes and returns a largest key on this priority queue.
- *
- * @return a largest key on this priority queue
- * @throws NoSuchElementException if this priority queue is empty
- */
+     * Removes and returns a largest key on this priority queue.
+     *
+     * @return a largest key on this priority queue
+     * @throws NoSuchElementException if this priority queue is empty
+     */
     T delMin() {
         try {
             if (isEmpty()) throw NoSuchElementException();
@@ -133,15 +133,25 @@ public:
     }
 
     /**
-  * Returns a string representation of this bag.
-  *
-  * @return the sequence of items in random order, separated by spaces
-  */
+      * Returns a string representation of this minimum priority queue.
+      *
+      * @return the sequence of items in ascending order, separated by spaces
+      */
     [[nodiscard]] std::string toString() const;
 
 private:
     vector<T> pq;               // store items at indices 1 to n
     int n{};                    // number of items on priority queue
+
+    /**
+     * @def the NoSuchElementException if there are no items in the priority queue after
+     * using the max(), methods
+     */
+    struct NoSuchElementException : public std::exception {
+        const char *what() {
+            return "Priority Queue Underflow";
+        }
+    };
 
     /***************************************************************************
      * Helper functions to restore the heap invariant.
@@ -174,16 +184,6 @@ private:
         pq[i] = pq[j];
         pq[j] = swap;
     }
-
-    /**
-     * @def the NoSuchElementException if there are no items in the priority queue after
-     * using the max(), methods
-     */
-    struct NoSuchElementException : public std::exception {
-        const char *what() {
-            return "Priority Queue Underflow";
-        }
-    };
 
 };
 

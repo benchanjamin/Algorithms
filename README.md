@@ -17,7 +17,7 @@ WeightedQuickUnionUF.cpp
 and WeightedQuickUnionUF.hpp \
 [Selection.java](https://algs4.cs.princeton.edu/21elementary/Selection.java.html) -> SelectionSort.hpp \
 [Insertion.java](https://algs4.cs.princeton.edu/25applications/Insertion.java.html) -> InsertionSort.hpp \
-[ShellSort.java](https://algs4.cs.princeton.edu/21elementary/Shell.java.html) -> ShellSort.hpp \
+[Shell.java](https://algs4.cs.princeton.edu/21elementary/Shell.java.html) -> ShellSort.hpp \
 [Mergesort.java](https://algs4.cs.princeton.edu/14analysis/Mergesort.java.html) -> MergeSort.hpp \
 [MergeBU.java](https://algs4.cs.princeton.edu/22mergesort/MergeBU.java.html) -> MergeSortBU.hpp \
 [Quick.java](https://algs4.cs.princeton.edu/23quicksort/Quick.java.html) -> QuickSort.hpp and QuickSelect.hpp \

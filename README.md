@@ -1,6 +1,6 @@
 # Algorithms
 
-As of September 6, 2021, this C++ library is half-complete and is still a making in-progress.
+As of September 6, 2021, this C++ library is half-complete.
 
 I created a C++ library that replicates most of the functionalities of Prof. Sedgewick and Prof. Wayne's Java libraries
 from their textbook, Algorithms, 4th edition. All of my C++ programs are tested in my main.cpp file and are
